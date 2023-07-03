@@ -92,17 +92,18 @@ end
 
 function GM:EntityTakeDamage(ent, dmginfo)
 	local attacker = dmginfo:GetAttacker()
+	local wep = attacker:GetActiveWeapon() or dmginfo:GetInflictor()
 	if GAMEMODE:GetGameState() ~= 2 and GAMEMODE:GetGameState() ~= 3 then
 		return false
 	else
 		if not ent:IsPlayer() then
 			if attacker:IsPlayer() then
-				if attacker:GetActiveWeapon() ~= NULL then
-					if attacker:GetActiveWeapon():GetClass() == "weapon_pistol" then
+				if wep ~= NULL then
+					if wep:GetClass() == "weapon_pistol" then
 						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - 1)
 					else
 						for _, Weapon in pairs(Weapons) do
-							if attacker:GetActiveWeapon():GetClass() == Weapon.Class then
+							if wep:GetClass() == Weapon.Class then
 								ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - tonumber(Weapon.Damage))
 							end
 						end

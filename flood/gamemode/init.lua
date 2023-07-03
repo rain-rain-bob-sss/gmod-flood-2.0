@@ -63,6 +63,9 @@ function GM:InitPostEntity()
 		if v:GetClass() == "trigger_hurt" then 
 			v:Remove() 
 		end 
+		if v:GetClass() == "trigger_teleport" then 
+			v:Remove() 
+		end 
 	end
 end
 

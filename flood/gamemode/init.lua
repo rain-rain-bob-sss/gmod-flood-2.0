@@ -149,7 +149,7 @@ entitiesdmg={
 function GM:EntityTakeDamage(ent, dmginfo)
 	local attacker = dmginfo:GetAttacker()
 	if(ent:CreatedByMap())then return false end
-	if GAMEMODE:GetGameState() ~= 2 and GAMEMODE:GetGameState() ~= 3 then
+	if GAMEMODE:GetGameState() ~= 2 and GAMEMODE:GetGameState() ~= 3 and GAMEMODE:GetGameState() ~= 4 then
 		return false
 	else
 		if not ent:IsPlayer() then
@@ -160,17 +160,25 @@ function GM:EntityTakeDamage(ent, dmginfo)
 					if((wepsdamagealt[wep:GetClass()] or wepdmglist[wep:GetClass()] or 1) < 0)then --heal weapon?
 						--do something?
 					else
-						--return false 
+						if(GAMEMODE:GetGameState()~=4)then
+							return false 
+						end
 					end
 				end
 				--if wep ~= NULL then
 					local mul = GetConVar("flood_damage_cashmul"):GetFloat()
 					local damage = 0
 					if wep:GetClass() == "weapon_pistol" then
-						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - 1)
 						damage=1
+						if(GAMEMODE:GetGameState()==4)then
+							damage=damage*20
+						end
+						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - damage)
 					else
 						damage=(wepsdamagealt[wep:GetClass()] or wepdmglist[wep:GetClass()] or 1)
+						if(GAMEMODE:GetGameState()==4)then
+							damage=damage*20
+						end
 						--print(wepsdamagealt[wep:GetClass()])
 						ent:SetNWInt("CurrentPropHealth", math.min(ent:GetNWInt("BasePropHealth"),ent:GetNWInt("CurrentPropHealth") - damage))
 					end
@@ -187,7 +195,9 @@ function GM:EntityTakeDamage(ent, dmginfo)
 			end
 			
 			if ent:GetNWInt("CurrentPropHealth") <= 0 and IsValid(ent) then
-				ent:EmitSound('physics/concrete/concrete_break2.wav',75,125,1,CHAN_AUTO,0,0)
+				for i=1,5 do
+					ent:EmitSound('physics/concrete/concrete_break2.wav',75,math.random(100,125+i*5),1,CHAN_STATIC,0,0)
+				end
 				ent:Remove()
 			end
 			return false --Dont do source engine damage

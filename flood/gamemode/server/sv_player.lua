@@ -34,6 +34,34 @@ function GM:PlayerSpawn( ply )
 	ply:UnSpectate()
 	ply:SetCollisionGroup(COLLISION_GROUP_WEAPON)
  	ply:SetPlayerColor(ply:GetPlayerColor())
+	--
+	-- If the player doesn't have a team in a TeamBased game
+	-- then spawn him as a spectator
+	--
+	local pl=ply
+	if ( self.TeamBased && ( pl:Team() == TEAM_SPECTATOR || pl:Team() == TEAM_UNASSIGNED ) ) then
+
+		self:PlayerSpawnAsSpectator( pl )
+		return
+
+	end
+
+	-- Stop observer mode
+	pl:UnSpectate()
+
+	player_manager.OnPlayerSpawn( pl, transiton )
+	player_manager.RunClass( pl, "Spawn" )
+
+	-- If we are in transition, do not touch player's weapons
+	if ( !transiton ) then
+		-- Call item loadout function
+		hook.Call( "PlayerLoadout", GAMEMODE, pl )
+	end
+
+	-- Set player model
+	hook.Call( "PlayerSetModel", GAMEMODE, pl )
+
+	pl:SetupHands()
 end
 
 function GM:ForcePlayerSpawn()

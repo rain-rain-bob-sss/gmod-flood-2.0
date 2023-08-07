@@ -42,7 +42,7 @@ function PANEL:Init()
 				surface.PlaySound("ui/buttonclick.wav")		
 			end
 
-			if v.Name and v.Price and v.Damage and v.Ammo then ItemIcon:SetToolTip(Format("%s", "Name: "..v.Name.."\nPrice: $"..v.Price.."\nDamage: "..v.Damage.."\nAmmo: "..v.Ammo)) 
+			if v.Name and v.Price and v.Ammo then ItemIcon:SetToolTip(Format("%s", "Name: "..v.Name.."\nPrice: $"..v.Price.."\nDamage: "..(v.Damage or "???").."\nAmmo: "..v.Ammo)) 
 			else ItemIcon:SetToolTip(Format("%s", "Failed to load tooltip - Missing Description")) end
 
 			if v.Group then	self.FloodWeaponIconList[v.Group]:AddItem(ItemIcon) end

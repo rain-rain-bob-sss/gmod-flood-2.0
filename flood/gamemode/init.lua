@@ -140,28 +140,30 @@ for _, Weapon in pairs(Weapons) do
 	wepdmglist[Weapon.Class]=tonumber(Weapon.Damage)
 end
 wepsdamagealt={
-	rpg_missile=wepdmglist["weapon_rpg"]
+	rpg_missile=wepdmglist["weapon_rpg"],
+	weapon_stunstick=-5
 }
 entitiesdmg={
 
 }
 function GM:EntityTakeDamage(ent, dmginfo)
 	local attacker = dmginfo:GetAttacker()
-	local wep = dmginfo:GetInflictor()
 	if(ent:CreatedByMap())then return false end
 	if GAMEMODE:GetGameState() ~= 2 and GAMEMODE:GetGameState() ~= 3 then
 		return false
 	else
 		if not ent:IsPlayer() then
 			if attacker:IsPlayer() then
+				local wep = dmginfo:GetAttacker():GetActiveWeapon():IsValid() and dmginfo:GetAttacker():GetActiveWeapon() or dmginfo:GetInflictor()
+				--print(wep:GetClass())
 				if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then 
 					if(wepdmglist[wep:GetClass()] or wepsdamagealt[wep:GetClass()] or 1 < 0)then --heal weapon?
 						--do something?
 					else
-						return false 
+						--return false 
 					end
 				end
-				if wep ~= NULL then
+				--if wep ~= NULL then
 					local mul = GetConVar("flood_damage_cashmul"):GetFloat()
 					local damage = 0
 					if wep:GetClass() == "weapon_pistol" then
@@ -169,17 +171,18 @@ function GM:EntityTakeDamage(ent, dmginfo)
 						damage=1
 					else
 						damage=(wepdmglist[wep:GetClass()] or wepsdamagealt[wep:GetClass()] or 1)
-						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - damage)
+						--print(wepsdamagealt[wep:GetClass()])
+						ent:SetNWInt("CurrentPropHealth", math.min(ent:GetNWInt("BasePropHealth"),ent:GetNWInt("CurrentPropHealth") - damage))
 					end
 					if(damage*mul>0)then
 						attacker:AddCash(damage*mul)
 					end
-				end
+				--end
 			else
 				if attacker:GetClass() == "entityflame" then
 					ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - math.random(0.5,1.5))
 				else
-					ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - entitiesdmg[attacker:GetClass()] or 1)
+					ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - (entitiesdmg[attacker:GetClass()] or 1))
 				end
 			end
 			

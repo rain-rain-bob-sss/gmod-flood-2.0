@@ -187,8 +187,8 @@ function GM:EntityTakeDamage(ent, dmginfo)
 				ent:EmitSound('physics/concrete/concrete_break2.wav',75,125,1,CHAN_AUTO,0,0)
 				ent:Remove()
 			end
+			return false --Dont do source engine damage
 		end
-		return false --Dont do source engine damage
 	end
 end
 

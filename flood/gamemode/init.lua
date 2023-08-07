@@ -140,7 +140,7 @@ for _, Weapon in pairs(Weapons) do
 	wepdmglist[Weapon.Class]=tonumber(Weapon.Damage)
 end
 wepsdamagealt={
-	rpg_missile
+	rpg_missile=wepdmglist["weapon_rpg"]
 }
 entitiesdmg={
 

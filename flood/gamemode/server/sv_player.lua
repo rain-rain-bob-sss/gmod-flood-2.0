@@ -30,6 +30,8 @@ end
 function GM:PlayerSpawn( ply )
 	player_manager.SetPlayerClass( ply, "player_flood" ) -- USE THIS SHIT
 	hook.Call( "PlayerLoadout", GAMEMODE, ply )
+	player_manager.RunClass( pl, "Loadout" )
+	player_manager.RunClass( pl, "SetModel" )
 	hook.Call( "PlayerSetModel", GAMEMODE, ply )
 	ply:UnSpectate()
 	ply:SetCollisionGroup(COLLISION_GROUP_WEAPON)

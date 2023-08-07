@@ -103,6 +103,12 @@ function GM:BuildPhase()
 		for _, v in pairs(ents.FindByClass("func_breakable")) do
 			v:Fire("Break", "", 0)
 		end
+		for _, v in pairs(ents.FindByClass("trigger_teleport")) do
+			v:Fire("Kill", "", 0)
+		end
+		for _, v in pairs(ents.FindByClass("trigger_hurt")) do
+			v:Fire("Kill", "", 0)
+		end
 
 		-- Unfreeze everything
 		for _, v in pairs(ents.GetAll()) do

@@ -36,6 +36,7 @@ CreateConVar("flood_reset_time", 40, FCVAR_NOTIFY, "Time after fight phase to al
 -- Cash Convars
 CreateConVar("flood_participation_cash", 50, FCVAR_NOTIFY, "Amount of cash given to a player every 5 seconds of being alive (def: 50)")
 CreateConVar("flood_bonus_cash", 300, FCVAR_NOTIFY, "Amount of cash given to the winner of a round (def: 300)")
+CreateConVar("flood_damage_cashmul",1.25, FCVAR_NOTIFY, "Amount of cash given to player damage mul (def: 1.25)")
 
 -- Water Hurt System
 CreateConVar("flood_wh_enabled", 1, FCVAR_NOTIFY, "Does the water hurt players - 1=true 2=false (def: 1)")
@@ -46,6 +47,7 @@ CreateConVar("flood_wh_tick", 1, FCVAR_NOTIFY, "How many second to takes (def: 0
 CreateConVar("flood_max_player_props", 20, FCVAR_NOTIFY, "How many props a player can spawn (def: 30)")
 CreateConVar("flood_max_donator_props", 30, FCVAR_NOTIFY, "How many props a donator can spawn (def: 30)")
 CreateConVar("flood_max_admin_props", 40, FCVAR_NOTIFY, "How many props an admin can spawn (def: 40)")
+CreateConVar("flood_max_sadmin_props", 40, FCVAR_NOTIFY, "How many props an superadmin can spawn (def: 40)")
 _ha('PlayerSpawnSENT','No spawn sent exploit.',function(p,c)
 	if(p:IsSuperAdmin())then 
 		return true
@@ -154,11 +156,16 @@ function GM:EntityTakeDamage(ent, dmginfo)
 			if attacker:IsPlayer() then
 				--if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then return false -- WTF TEAM DAMAGE
 				if wep ~= NULL then
+					local mul = GetConVar("flood_damage_cashmul")
+					local damage = 0
 					if wep:GetClass() == "weapon_pistol" then
 						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - 1)
+						damage=1
 					else
-						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - (wepdmglist[wep:GetClass()] or wepsdamagealt[wep:GetClass()] or 1))
+						damage=(wepdmglist[wep:GetClass()] or wepsdamagealt[wep:GetClass()] or 1)
+						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - damage)
 					end
+					attacker:AddCash(damage*mul)
 				end
 			else
 				if attacker:GetClass() == "entityflame" then

@@ -40,6 +40,7 @@ CreateConVar("flood_bonus_cash", 300, FCVAR_NOTIFY, "Amount of cash given to the
 -- Water Hurt System
 CreateConVar("flood_wh_enabled", 1, FCVAR_NOTIFY, "Does the water hurt players - 1=true 2=false (def: 1)")
 CreateConVar("flood_wh_damage", 1, FCVAR_NOTIFY, "How much damage a player takes per cycle (def: 1)")
+CreateConVar("flood_wh_tick", 1, FCVAR_NOTIFY, "How many second to takes (def: 0.5)")
 
 -- Prop Limits
 CreateConVar("flood_max_player_props", 20, FCVAR_NOTIFY, "How many props a player can spawn (def: 30)")

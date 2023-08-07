@@ -232,7 +232,14 @@ function GM:PurchaseProp(ply, cmd, args)
 			if ply.PropSpawnDelay <= CurTime() then
 				
 				-- Checking to see if they can even spawn props.
-				if ply:IsAdmin() then
+				if(ply:IsSuperAdmin())then
+					if ply:GetCount("flood_props") >= GetConVar("flood_max_sadmin_props"):GetInt() then
+						ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+						ct:AddText("You have reached the admin's prop spawning limit!")
+						ct:Send(ply)
+						return
+					end 
+				elseif ply:IsAdmin() then
 					if ply:GetCount("flood_props") >= GetConVar("flood_max_admin_props"):GetInt() then
 						ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 						ct:AddText("You have reached the admin's prop spawning limit!")

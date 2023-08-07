@@ -154,7 +154,13 @@ function GM:EntityTakeDamage(ent, dmginfo)
 	else
 		if not ent:IsPlayer() then
 			if attacker:IsPlayer() then
-				--if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then return false -- WTF TEAM DAMAGE
+				if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then 
+					if(wepdmglist[wep:GetClass()] or wepsdamagealt[wep:GetClass()] or 1 < 0)then --heal weapon?
+						--do something?
+					else
+						return false 
+					end
+				end
 				if wep ~= NULL then
 					local mul = GetConVar("flood_damage_cashmul"):GetFloat()
 					local damage = 0
@@ -165,7 +171,9 @@ function GM:EntityTakeDamage(ent, dmginfo)
 						damage=(wepdmglist[wep:GetClass()] or wepsdamagealt[wep:GetClass()] or 1)
 						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - damage)
 					end
-					attacker:AddCash(damage*mul)
+					if(damage*mul>0)then
+						attacker:AddCash(damage*mul)
+					end
 				end
 			else
 				if attacker:GetClass() == "entityflame" then

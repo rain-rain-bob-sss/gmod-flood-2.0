@@ -31,7 +31,7 @@ if not NADMOD then
 end
 if not NADMOD.Props then
 	-- NADMOD PP Initialization
-	NADMOD.PPVersion = "1.2.6p"
+	NADMOD.PPVersion = "1.2.6p moded by rb"
 	NADMOD.Props = {} // {entid = {Ent = ent, Owner = ply, SteamID = ply:SteamID(), Name = ply:Nick() or "W" or "O"}}
 	NADMOD.PropOwnersSmall = {} // A smaller buffer of PropOwner names to send to current players
 	NADMOD.AutoCDPTimers = {}
@@ -121,7 +121,8 @@ end
 function NADMOD.PlayerCanTouch(ply, ent)
 	-- If PP is off or the ent is worldspawn, let them touch it
 	if not tobool(NADMOD.PPConfig["toggle"]) or ent:IsWorld() then return true end
-	
+		-- Admins can touch anyones props + world
+	if NADMOD.PPConfig["adminall"] and NADMOD.IsPPAdmin(ply) then return true end
 	if !IsValid(ent) or !IsValid(ply) or ent:IsPlayer() or !ply:IsPlayer() then return false end
 	
 	if not NADMOD.Props[ent:EntIndex()] then
@@ -129,15 +130,13 @@ function NADMOD.PlayerCanTouch(ply, ent)
 		if(string.find(class, "stone_") == 1 or string.find(class, "rock_") == 1 or string.find(class, "stargate_") == 0 or string.find(class, "dhd_") == 0 or class == "flag" or class == "item") then
 			NADMOD.SetOwnerWorld(ent)
 		else
-			NADMOD.PlayerMakePropOwner(ply, ent)
-			NADMOD.Notify(ply, "You now own this prop")
-			return true
+			--NADMOD.PlayerMakePropOwner(ply, ent)
+			NADMOD.Notify(ply, "You may not touch this prop.")
+			return false
 		end
 	end
-	-- Ownerless props can be touched by all
-	if NADMOD.Props[ent:EntIndex()].Name == "O" then return true end 
-	-- Admins can touch anyones props + world
-	if NADMOD.PPConfig["adminall"] and NADMOD.IsPPAdmin(ply) then return true end
+	-- Ownerless props cannot touch by all
+	if NADMOD.Props[ent:EntIndex()].Name == "O" then return false end 
 	-- Players can touch their own props and friends
 	if NADMOD.Props[ent:EntIndex()].SteamID == ply:SteamID() or NADMOD.IsFriendProp(ply, ent) then return true end
 	

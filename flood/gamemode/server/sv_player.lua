@@ -28,6 +28,7 @@ function GM:PlayerInitialSpawn(ply)
 end
 
 function GM:PlayerSpawn( ply )
+	player_manager.SetPlayerClass( pl, "player_flood" ) -- USE THIS SHIT
 	hook.Call( "PlayerLoadout", GAMEMODE, ply )
 	hook.Call( "PlayerSetModel", GAMEMODE, ply )
 	ply:UnSpectate()

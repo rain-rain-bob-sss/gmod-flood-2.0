@@ -156,7 +156,7 @@ function GM:EntityTakeDamage(ent, dmginfo)
 			if attacker:IsPlayer() then
 				--if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then return false -- WTF TEAM DAMAGE
 				if wep ~= NULL then
-					local mul = GetConVar("flood_damage_cashmul")
+					local mul = GetConVar("flood_damage_cashmul"):GetFloat
 					local damage = 0
 					if wep:GetClass() == "weapon_pistol" then
 						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - 1)

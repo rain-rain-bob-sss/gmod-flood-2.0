@@ -26,7 +26,7 @@ for _, file in pairs (file.Find("flood/gamemode/client/vgui/*.lua", "LUA")) do
 	MsgN("-> "..file)
 	AddCSLuaFile("flood/gamemode/client/vgui/"..file)
 end
-
+local _ha = hook.Add
 -- Timer ConVars! Yay!
 CreateConVar("flood_build_time", 240, FCVAR_NOTIFY, "Time allowed for building (def: 240)")
 CreateConVar("flood_flood_time", 20, FCVAR_NOTIFY, "Time between build phase and fight phase (def: 20)")
@@ -46,7 +46,46 @@ CreateConVar("flood_wh_tick", 1, FCVAR_NOTIFY, "How many second to takes (def: 0
 CreateConVar("flood_max_player_props", 20, FCVAR_NOTIFY, "How many props a player can spawn (def: 30)")
 CreateConVar("flood_max_donator_props", 30, FCVAR_NOTIFY, "How many props a donator can spawn (def: 30)")
 CreateConVar("flood_max_admin_props", 40, FCVAR_NOTIFY, "How many props an admin can spawn (def: 40)")
-
+_ha('PlayerSpawnSENT','No spawn sent exploit.',function(p,c)
+	if(p:IsSuperAdmin())then 
+		return true
+	else
+		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn sent!")
+		return false
+	end
+end)
+_ha('PlayerSpawnSWEP','No spawn wep exploit.',function(p,c)
+	if(p:IsSuperAdmin())then 
+		return true
+	else
+		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn SWEP!")
+		return false
+	end
+end)
+_ha('PlayerSpawnRagdoll','No spawn rag exploit.',function(p,c)
+	if(p:IsSuperAdmin())then 
+		return true
+	else
+		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn ragdoll!")
+		return false
+	end
+end)
+_ha('PlayerSpawnVehicle','No spawn veh exploit.',function(p,c)
+	if(p:IsSuperAdmin())then 
+		return true
+	else
+		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn vehicle!")
+		return false
+	end
+end)
+_ha('PlayerSpawnEffect','No spawn effect exploit.',function(p,c)
+	if(p:IsSuperAdmin())then 
+		return true
+	else
+		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn effect!")
+		return false
+	end
+end)
 function GM:Initialize()
 	self.ShouldHaltGamemode = false
 	self:InitializeRoundController()

@@ -12,7 +12,7 @@ function GM:WaterHurts()
 				    v:TakeDamageInfo(dmginfo)
 				end
 			end	
-			whTick = CurTime() + (GetConVar("flood_wh_tick") or 0.5)
+			whTick = CurTime() + (GetConVar("flood_wh_tick"):GetFloat() or 0.5)
 		end
 	end
 end

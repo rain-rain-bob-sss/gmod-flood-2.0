@@ -129,4 +129,4 @@ function PLAYER:FinishMove( move ) -- HOORAY BHOP TIME!
 
 end
 
-player_manager.RegisterClass( "player_sandbox", PLAYER, "player_default" )
+player_manager.RegisterClass( "player_flood", PLAYER, "player_default" )

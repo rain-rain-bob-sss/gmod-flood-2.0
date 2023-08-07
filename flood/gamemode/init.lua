@@ -157,7 +157,7 @@ function GM:EntityTakeDamage(ent, dmginfo)
 				local wep = dmginfo:GetAttacker():GetActiveWeapon():IsValid() and dmginfo:GetAttacker():GetActiveWeapon() or dmginfo:GetInflictor()
 				--print(wep:GetClass())
 				if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then 
-					if(wepdmglist[wep:GetClass()] or wepsdamagealt[wep:GetClass()] or 1 < 0)then --heal weapon?
+					if((wepsdamagealt[wep:GetClass()] or wepdmglist[wep:GetClass()] or 1) < 0)then --heal weapon?
 						--do something?
 					else
 						--return false 
@@ -170,7 +170,7 @@ function GM:EntityTakeDamage(ent, dmginfo)
 						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - 1)
 						damage=1
 					else
-						damage=(wepdmglist[wep:GetClass()] or wepsdamagealt[wep:GetClass()] or 1)
+						damage=(wepsdamagealt[wep:GetClass()] or wepdmglist[wep:GetClass()] or 1)
 						--print(wepsdamagealt[wep:GetClass()])
 						ent:SetNWInt("CurrentPropHealth", math.min(ent:GetNWInt("BasePropHealth"),ent:GetNWInt("CurrentPropHealth") - damage))
 					end

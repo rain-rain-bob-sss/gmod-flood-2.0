@@ -13,7 +13,8 @@ timer.Create("Flood:OffProps", 1, 0, function()
 		for _, v in pairs(player.GetAll()) do 
 			local ent = v:GetGroundEntity()
 			if ent and IsValid(ent) and ent:GetClass() == "prop_physics" and ent:CPPIGetOwner() != v and PlayerIsFriend(ent:CPPIGetOwner(), v) == false then 
-				v:SetVelocity(Vector(math.random(1,5000) ,math.random(1,5000) ,math.random(1,5000) ))
+				v:TakeDamage(10)
+			        v:SetVelocity(v:GetVelocity()*1.2+Vector(0,0,500))
 			end
 		end
 	end

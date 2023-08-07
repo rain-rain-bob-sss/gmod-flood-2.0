@@ -47,11 +47,7 @@ function GM:ForcePlayerSpawn()
 end
 
 function GM:PlayerLoadout(ply)
-	ply:Give("gmod_tool")
-	ply:Give("weapon_physgun")
-	ply:Give("flood_propseller")
-
-	ply:SelectWeapon("weapon_physgun")
+	
 end
 
 function GM:PlayerSetModel(ply)

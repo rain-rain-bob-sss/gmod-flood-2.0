@@ -132,10 +132,21 @@ end
 function GM:ShowHelp(ply)
 	ply:ConCommand("flood_helpmenu")
 end
+wepdmglist={}
+--Cmon,Are you dumb? why loop in entitytakedamage! dumbass
+for _, Weapon in pairs(Weapons) do
+	wepdmglist[Weapon.Class]=tonumber(Weapon.Damage)
+end
+wepsdamagealt={
+	rpg_missile
+}
+entitiesdmg={
 
+}
 function GM:EntityTakeDamage(ent, dmginfo)
 	local attacker = dmginfo:GetAttacker()
-	local wep = attacker:GetActiveWeapon() or dmginfo:GetInflictor()
+	local wep = dmginfo:GetInflictor()
+	if(ent:CreatedByMap())then return false end
 	if GAMEMODE:GetGameState() ~= 2 and GAMEMODE:GetGameState() ~= 3 then
 		return false
 	else
@@ -145,25 +156,23 @@ function GM:EntityTakeDamage(ent, dmginfo)
 					if wep:GetClass() == "weapon_pistol" then
 						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - 1)
 					else
-						for _, Weapon in pairs(Weapons) do
-							if wep:GetClass() == Weapon.Class then
-								ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - tonumber(Weapon.Damage))
-							end
-						end
+						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - (wepdmglist[wep:GetClass()] or wepsdamagealt[wep:GetClass()] or 1))
 					end
 				end
 			else
 				if attacker:GetClass() == "entityflame" then
-					ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - 0.5)
+					ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - math.random(0.5,1.5))
 				else
-					ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - 1)
+					ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - entitiesdmg[attacker:GetClass()] or 1)
 				end
 			end
 			
 			if ent:GetNWInt("CurrentPropHealth") <= 0 and IsValid(ent) then
+				ent:EmitSound('physics/concrete/concrete_break2.wav',75,125,1,CHAN_AUTO,0,0)
 				ent:Remove()
 			end
 		end
+		return false --Dont do source engine damage
 	end
 end
 

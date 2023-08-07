@@ -183,7 +183,7 @@ function GM:EntityTakeDamage(ent, dmginfo)
 						ent:SetNWInt("CurrentPropHealth", math.min(ent:GetNWInt("BasePropHealth"),ent:GetNWInt("CurrentPropHealth") - damage))
 					end
 					if(damage*mul>0)then
-						attacker:AddCash(damage*mul)
+						attacker:AddCash(math.floor(damage*mul))
 					end
 				--end
 			else
@@ -197,6 +197,9 @@ function GM:EntityTakeDamage(ent, dmginfo)
 			if ent:GetNWInt("CurrentPropHealth") <= 0 and IsValid(ent) then
 				for i=1,5 do
 					ent:EmitSound('physics/concrete/concrete_break2.wav',75,math.random(100,125+i*5),1,CHAN_STATIC,0,0)
+				end
+				if(GAMEMODE:GetGameState()==4)then
+					attacker:AddCash(15)
 				end
 				ent:Remove()
 			end

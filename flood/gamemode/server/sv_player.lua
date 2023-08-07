@@ -30,8 +30,6 @@ end
 function GM:PlayerSpawn( ply )
 	player_manager.SetPlayerClass( ply, "player_flood" ) -- USE THIS SHIT
 	hook.Call( "PlayerLoadout", GAMEMODE, ply )
-	player_manager.RunClass( pl, "Loadout" )
-	player_manager.RunClass( pl, "SetModel" )
 	hook.Call( "PlayerSetModel", GAMEMODE, ply )
 	ply:UnSpectate()
 	ply:SetCollisionGroup(COLLISION_GROUP_WEAPON)
@@ -41,6 +39,8 @@ function GM:PlayerSpawn( ply )
 	-- then spawn him as a spectator
 	--
 	local pl=ply
+	player_manager.RunClass( pl, "Loadout" )
+	player_manager.RunClass( pl, "SetModel" )
 	if ( self.TeamBased && ( pl:Team() == TEAM_SPECTATOR || pl:Team() == TEAM_UNASSIGNED ) ) then
 
 		self:PlayerSpawnAsSpectator( pl )

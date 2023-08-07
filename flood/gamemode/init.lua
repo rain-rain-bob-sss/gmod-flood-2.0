@@ -152,6 +152,7 @@ function GM:EntityTakeDamage(ent, dmginfo)
 	else
 		if not ent:IsPlayer() then
 			if attacker:IsPlayer() then
+				--if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then return false -- WTF TEAM DAMAGE
 				if wep ~= NULL then
 					if wep:GetClass() == "weapon_pistol" then
 						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - 1)

@@ -6,7 +6,7 @@ Flood 2.0 Credits:
 3) Nebual - for the development of NADMOD and permission to use it in our gamemode.
 
 Flood 2.2 Credits:  
-1) [TW]Rain_bob Fix bugs and add new things
+1)[TW]Rain_bob Fix bugs and add new things
 
 Installation:  
 1) Drop the flood folder into your gamemode folder. Simple as that.

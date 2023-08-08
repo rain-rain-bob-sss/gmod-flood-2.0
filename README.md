@@ -1,10 +1,11 @@
-# Flood-2.0
+# Flood-2.2
 
-Credits:  
+Flood 2.0 Credits:  
 1) [MS] Mythic (Mythikos) - for development of serverside and clientside code.  
 2) Freezebug - for development of serverside code.   
-3) Nebual - for the development of NADMOD and permission to use it in our gamemode.  
-
+3) Nebual - for the development of NADMOD and permission to use it in our gamemode.
+Flood 2.2 Credits:  
+1) [TW]Rain_bob Fix bugs and add new things
 
 Installation:  
 1) Drop the flood folder into your gamemode folder. Simple as that.

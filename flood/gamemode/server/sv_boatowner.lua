@@ -10,7 +10,7 @@ end
 
 timer.Create("Flood:OffProps", 0.08, 0, function() 
 	if GAMEMODE:GetGameState() == 2 or GAMEMODE:GetGameState() == 3 then
-		for _, v in pairs(player.GetAll()) do 
+		for _, v in ipairs(player.GetAll()) do 
 			local ent = v:GetGroundEntity()
 			if ent and IsValid(ent) and ent:GetClass() == "prop_physics" and ent:CPPIGetOwner() != v and PlayerIsFriend(ent:CPPIGetOwner(), v) == false then 
 				v:TakeDamage(10)

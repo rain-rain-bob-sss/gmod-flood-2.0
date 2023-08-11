@@ -295,7 +295,7 @@ function GM:PurchaseProp(ply, cmd, args)
 					local ent = ents.Create("prop_physics")
 					if(not ent)then return end
 					ent:SetModel(Prop.Model)
-					ent:SetAngle(ply:GetEyeAngles()*Angle(0,1,0))
+					ent:SetAngle(ply:EyeAngles()*Angle(0,1,0))
 					ent:SetPos(tr.HitPos + Vector(0, 0, (ent:OBBCenter():Distance(ent:OBBMins()) + 5)))
 					ent:CPPISetOwner(ply)
 					ent:Spawn()

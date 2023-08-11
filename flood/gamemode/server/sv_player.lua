@@ -306,19 +306,18 @@ function GM:PurchaseProp(ply, cmd, args)
 					ent:SetHealth(Prop.Health)
 					ent:SetNWInt("CurrentPropHealth", math.floor(Prop.Health))
 					ent:SetNWInt("BasePropHealth", math.floor(Prop.Health))
-					local undofunc=function(t,money)
-						if(ent:IsValid())then
+					local undofunc=function(t,ent,money)
+						if(ent:IsValid() and (not ent.flood_trashed))then
 							ply:AddCash(money)
 							--ent:EmitSound("garrysmod/save_load1.wav")
 							ent:Remove()
-							return true
 						else
 							return false --You may not undo.
 						end
 					end
 					undo.Create("Prop["..ent:EntIndex().."]".." $"..tostring(pp))
 					--undo.AddEntity(ent)
-					undo.AddFunction(undofunc,pp)
+					undo.AddFunction(undofunc,ent,pp)
 					undo.SetPlayer(ply)
 					undo.Finish("Prop["..ent:EntIndex().."]".." $"..tostring(pp))
 					ct:AddText("[Flood] ", Color(132, 199, 29, 255))

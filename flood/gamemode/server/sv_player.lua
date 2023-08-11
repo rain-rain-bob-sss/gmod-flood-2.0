@@ -93,7 +93,7 @@ function GM:PlayerDeathThink(ply)
 end
 
 function GM:PlayerDeath(ply, inflictor, attacker )
-	ply.NextSpawnTime = CurTime() + 5
+	ply.NextSpawnTime = CurTime() + 3
 	ply.SpectateTime = CurTime() + 2
 
 	if IsValid(inflictor) && inflictor == attacker && (inflictor:IsPlayer() || inflictor:IsNPC()) then

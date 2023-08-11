@@ -5,7 +5,7 @@ function GM:WaterHurts()
 			for _, v in pairs(self:GetActivePlayers()) do
 				if v:WaterLevel() >= 1 then
 					local dmginfo = DamageInfo()
-				    dmginfo:SetDamageType(DMG_GENERIC)
+				    dmginfo:SetDamageType(16384)
 					dmginfo:SetDamage(GetConVar("flood_wh_damage"):GetFloat())
 				    dmginfo:SetAttacker(game.GetWorld())
 				    dmginfo:SetInflictor(game.GetWorld())

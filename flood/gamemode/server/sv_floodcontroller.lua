@@ -28,5 +28,6 @@ end
 function GM:LowerAllWaterControllers()
 	for k,v in pairs(GetWaterControllers()) do
 		v:Fire("close")
+		v:Fire("setspeed",600)
 	end
 end

@@ -309,7 +309,7 @@ function GM:PurchaseProp(ply, cmd, args)
 					local undofunc=function(t,money)
 						if(ent:IsValid())then
 							ply:AddCash(money)
-							ent:EmitSound("garrysmod/save_load1.wav")
+							--ent:EmitSound("garrysmod/save_load1.wav")
 							ent:Remove()
 							return true
 						else

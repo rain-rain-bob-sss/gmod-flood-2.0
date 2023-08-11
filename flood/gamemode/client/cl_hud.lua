@@ -156,7 +156,7 @@ function GM:HUDPaint()
 		
 		-- Health
 		local pHealth = LocalPlayer():Health()
-		local drawhp=math.Approach(drawhp,pHealth,0.2)
+		local drawhp=math.Approach(drawhp,pHealth,FrameTime())
 		local pHealthClamp = math.Clamp(drawhp / 100, 0, 1)
 		local pHealthWidth = (xSize - Spacer) * pHealthClamp
 		local shake={0,0}

@@ -349,9 +349,14 @@ concommand.Add("FloodPurchaseProp", function(ply, cmd, args) hook.Call("Purchase
 function GM:PurchaseWeapon(ply, cmd, args)
 	if not ply.PropSpawnDelay then ply.PropSpawnDelay = 0 end
 	if not IsValid(ply) or not args[1] then return end
-	
-	local Weapon = Weapons[math.floor(args[1])]
 	local ct = ChatText()
+	if(tonumber(args[1])==nil)then
+		ct:AddText('[Anti Exploit]',Color(255,0,0,255))
+		ct:AddText('A r e y o u.. e x p l o i t i n g ?')
+		ct:Send(ply)
+		return
+	end
+	local Weapon = Weapons[math.floor(args[1])]
 	if(Weapon==nil)then 
 		ct:AddText('[Anti Exploit]',Color(255,0,0,255))
 		ct:AddText('A r e y o u.. e x p l o i t i n g ?')

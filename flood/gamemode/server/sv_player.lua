@@ -82,7 +82,7 @@ function GM:PlayerLoadout(ply)
 end
 
 function GM:PlayerSetModel(ply)
-	ply:SetModel("models/player/Group03/Male_06.mdl")
+	--ply:SetModel("models/player/Group03/Male_06.mdl") No.
 end
 
 function GM:PlayerDeathSound()
@@ -145,7 +145,7 @@ function GM:PlayerDeath(ply, inflictor, attacker )
 		
 		net.Broadcast()
 		
-		MsgAll( attacker:Nick() .. " killed " .. ply:Nick() .. " using " .. inflictor:GetClass() .. "\n" )
+		MsgAll( attacker:Nick() .. " killed " .. ply:Nick() .. " using " .. inflictor:GetClass() .. ' BUT HOW??!!?!!?!???! '.."\n" )
 		
 	return end
 	
@@ -169,11 +169,11 @@ function GM:PlayerSwitchFlashlight(ply)
 end
 
 function GM:PlayerShouldTaunt( ply, actid )
-	return false
+	return true --You may taunt.
 end
 
 function GM:CanPlayerSuicide(ply)
-	return false
+	return true --????
 end
 
 -----------------------------------------------------------------------------------------------
@@ -288,12 +288,14 @@ function GM:PurchaseProp(ply, cmd, args)
 						return
 					end
 				end
-
-				if ply:CanAfford(Prop.Price) then
-					ply:SubCash(Prop.Price)
+				local pp=Prop.Price --Faster
+				if ply:CanAfford(pp) then
+					ply:SubCash(pp)
 
 					local ent = ents.Create("prop_physics")
+					if(not ent)then return end
 					ent:SetModel(Prop.Model)
+					ent:SetAngle(ply:GetEyeAngle()*Angle(0,1,0))
 					ent:SetPos(tr.HitPos + Vector(0, 0, (ent:OBBCenter():Distance(ent:OBBMins()) + 5)))
 					ent:CPPISetOwner(ply)
 					ent:Spawn()
@@ -301,7 +303,21 @@ function GM:PurchaseProp(ply, cmd, args)
 					ent:SetHealth(Prop.Health)
 					ent:SetNWInt("CurrentPropHealth", math.floor(Prop.Health))
 					ent:SetNWInt("BasePropHealth", math.floor(Prop.Health))
-
+					local undofunc=function(t,money)
+						if(ent:IsValid())then
+							ply:AddCash(money)
+							ent:EmitSound("garrysmod/save_load1.wav")
+							ent:Remove()
+							return true
+						else
+							return false --You may not undo.
+						end
+					end
+					undo.Create("Prop["..prop:EntIndex().."]".." $"..tostring(pp))
+					--undo.AddEntity(ent)
+					undo.AddFunction(undofunc,pp)
+					undo.SetPlayer(ply)
+					undo.Finish("Prop["..prop:EntIndex().."]".." $"..tostring(pp))
 					ct:AddText("[Flood] ", Color(132, 199, 29, 255))
 					ct:AddText("You have purchased a(n) "..Prop.Description..".")
 					ct:Send(ply)
@@ -334,7 +350,12 @@ function GM:PurchaseWeapon(ply, cmd, args)
 	
 	local Weapon = Weapons[math.floor(args[1])]
 	local ct = ChatText()
-
+	if(Weapon==nil)then 
+		ct:AddText('[Anti Exploit]',Color(255,0,0,255))
+		ct:AddText('A r e y o u.. e x p l o i t i n g ?')
+		ct:Send(ply)
+		return
+	end
 	if ply.Allow and Weapon and self:GetGameState() <= 1 then
 		if table.HasValue(ply.Weapons, Weapon.Class) then
 			ct:AddText("[Flood] ", Color(158, 49, 49, 255))

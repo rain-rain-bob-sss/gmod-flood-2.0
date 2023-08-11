@@ -173,7 +173,7 @@ function GM:PlayerShouldTaunt( ply, actid )
 end
 
 function GM:CanPlayerSuicide(ply)
-	return true --????
+	return false --????
 end
 
 -----------------------------------------------------------------------------------------------

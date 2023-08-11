@@ -136,7 +136,7 @@ function GM:HUDPaint()
 	if tr.Entity:IsValid() and not tr.Entity:IsPlayer() then
 		if tr.Entity:GetNWInt("CurrentPropHealth") == "" or tr.Entity:GetNWInt("CurrentPropHealth") == nil or tr.Entity:GetNWInt("CurrentPropHealth") == NULL then
 			draw.SimpleText("Fetching Health", "Flood_HUD_Small", x * 0.5, y * 0.5 - 25, color_white, 1, 1)
-		else
+		elseif(tr.Entity:GetNWInt("CurrentPropHealth")!="0")then
 			draw.SimpleText("Health: " .. tr.Entity:GetNWInt("CurrentPropHealth"), "Flood_HUD_Small", x * 0.5, y * 0.5 - 25, color_white, 1, 1)
 		end
 	end

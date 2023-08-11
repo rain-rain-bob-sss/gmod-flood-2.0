@@ -8,7 +8,7 @@ local function PlayerIsFriend(ply, ply2)
 	return false 
 end
 
-timer.Create("Flood:OffProps", 1, 0, function() 
+timer.Create("Flood:OffProps", 0.08, 0, function() 
 	if GAMEMODE:GetGameState() == 2 or GAMEMODE:GetGameState() == 3 then
 		for _, v in pairs(player.GetAll()) do 
 			local ent = v:GetGroundEntity()

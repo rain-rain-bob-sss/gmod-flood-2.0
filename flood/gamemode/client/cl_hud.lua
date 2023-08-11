@@ -50,6 +50,7 @@ local xSize = x * 0.2
 local ySize = y * 0.04
 local bWidth = Spacer + xSize + Spacer
 local bHeight = Spacer + ySize + Spacer
+local drawhp=100
 
 net.Receive("RoundState", function(len)
 	GameState = net.ReadFloat()
@@ -58,7 +59,9 @@ net.Receive("RoundState", function(len)
 	FightTimer = net.ReadFloat()
 	ResetTimer = net.ReadFloat()
 end)
-
+local function mylerp(f,t,fr)
+	return f+(t-f)*fr
+end
 function GM:HUDPaint()
 
 	if BuildTimer and FloodTimer and FightTimer and ResetTimer then
@@ -153,11 +156,15 @@ function GM:HUDPaint()
 		
 		-- Health
 		local pHealth = LocalPlayer():Health()
-		local pHealthClamp = math.Clamp(pHealth / 100, 0, 1)
+		local drawhp=mylerp(drawhp,pHealth,0.2)
+		local pHealthClamp = math.Clamp(drawhp / 100, 0, 1)
 		local pHealthWidth = (xSize - Spacer) * pHealthClamp
-
+		local shake={0,0}
+		if(drawhp<20)then
+			shake={math.random()*10,math.random()*10}
+		end
 		draw.RoundedBoxEx(6, Spacer * 2, y - (Spacer * 4) - (ySize * 3), Spacer + pHealthWidth, ySize, Color(128, 28, 28, 255), true, true, false, false)
-		draw.SimpleText(math.Max(pHealth, 0).." HP","Flood_HUD_B", xSize * 0.5 + (Spacer * 2), y - (ySize * 2.5) - (Spacer * 4), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(math.Max(pHealth, 0).." HP","Flood_HUD_B", xSize * 0.5 + (Spacer * 2) + shake[1], y - (ySize * 2.5) - (Spacer * 4) + shake[2], color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	
 		-- Ammo
 		if IsValid(LocalPlayer():GetActiveWeapon()) then

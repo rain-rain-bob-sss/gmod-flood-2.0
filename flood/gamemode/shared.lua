@@ -1,8 +1,8 @@
 DeriveGamemode("sandbox")
 
-GM.Name 	= "Flood"
-GM.Author 	= "Mythikos & Freezebug"
-GM.Version  = "2.0.0"
+GM.Name 	= "Flood 2.2"
+GM.Author 	= "2.0 by Mythikos & Freezebug,2.2 by [TW]Rain_bob"
+GM.Version  = "2.2.0"
 GM.Email 	= "n/a"
 GM.Website 	= "n/a"
 

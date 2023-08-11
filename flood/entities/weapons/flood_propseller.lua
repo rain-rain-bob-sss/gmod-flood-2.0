@@ -78,7 +78,7 @@ function SWEP:RemoveEnt(ent, ply)
 			ent:Remove()
 		end 
 	end)
-	
+	ent.flood_trashed=true
 	ent:SetNotSolid( true )
 	ent:SetMoveType( MOVETYPE_NONE )
 	ent:SetNoDraw( true )

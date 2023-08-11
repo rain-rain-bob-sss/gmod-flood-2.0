@@ -32,8 +32,11 @@ SWEP.Primary.Ammo			= "none"
 SWEP.Secondary.ClipSize		= -1
 SWEP.Secondary.DefaultClip	= -1
 SWEP.Secondary.Automatic	= false
-SWEP.Secondary.Ammo			= "none"
-
+SWEP.Secondary.Ammo	= "none"
+PropsModel={}
+for _, prop in pairs(Props) do
+	PropsModel[string.lower(prop.Model)]=prop
+end
 function SWEP:PrimaryAttack()
 	local tr = self.Owner:GetEyeTrace()
 	if not self:IsTraceValid(tr) then return end
@@ -42,13 +45,17 @@ function SWEP:PrimaryAttack()
 	if SERVER then
 		if ent:GetClass() == "prop_physics" then
 			if ent:CPPIGetOwner() == self.Owner then
-				for _, prop in pairs(Props) do
-					print(ent:GetModel())
-					print(prop.Model)
-					if string.lower(ent:GetModel()) == string.lower(prop.Model) then
-						self.Owner:AddCash(prop.Price)
-						self:RemoveEnt(ent, self.Owner)
-					end	
+				--for _, prop in pairs(Props) do
+				if(PropsModel[string.lower(ent:GetModel())])then --Faster
+					local prop=PropsModel[string.lower(ent:GetModel())]
+					--print(ent:GetModel())
+					--print(prop.Model)
+					--if string.lower(ent:GetModel()) == string.lower(prop.Model) then
+					--	self.Owner:AddCash(prop.Price)
+					--	self:RemoveEnt(ent, self.Owner)
+					--end	
+					self.Owner:AddCash(prop.Price)
+					self:RemoveEnt(ent, self.Owner)
 				end
 			end
 		end

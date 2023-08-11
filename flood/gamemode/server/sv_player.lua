@@ -295,7 +295,10 @@ function GM:PurchaseProp(ply, cmd, args)
 					local ent = ents.Create("prop_physics")
 					if(not ent)then return end
 					ent:SetModel(Prop.Model)
-					ent:SetAngle(ply:EyeAngles()*Angle(0,1,0))
+					local ea=ply:EyeAngles()
+					ea[1]=0
+					ea[3]=0
+					ent:SetAngle(ea)
 					ent:SetPos(tr.HitPos + Vector(0, 0, (ent:OBBCenter():Distance(ent:OBBMins()) + 5)))
 					ent:CPPISetOwner(ply)
 					ent:Spawn()

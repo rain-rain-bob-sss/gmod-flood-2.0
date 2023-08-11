@@ -17,7 +17,7 @@ timer.Create("Flood:OffProps", 0.08, 0, function()
 				dmginfo:SetDamage(10)
 				dmginfo:SetAttacker(ent)
 				dmginfo:SetDamageType(DMG_DISSOLVE)
-				v:TakeDamage(10)
+				v:TakeDamageInfo(dmginfo)
 			        v:SetVelocity(v:GetVelocity()*1.2+Vector(0,0,600))
 			end
 		end

@@ -156,6 +156,23 @@ function GM:EntityTakeDamage(ent, dmginfo)
 			if attacker:IsPlayer() then
 				local wep = dmginfo:GetAttacker():GetActiveWeapon():IsValid() and dmginfo:GetAttacker():GetActiveWeapon() or dmginfo:GetInflictor()
 				--print(wep:GetClass())
+				if(ent:CreatedByMap())then --You may not cheat by stand on map props
+					if(string.lower(ent:GetClass())=="func_physbox")then
+						ent:GetPhysicsObject():SetVelocity(Vector(0,0,500))
+						timer.Simple(3,function()
+							if(ent:IsValid())then
+								ent:Remove()
+							end
+						end)
+					elseif(string.lower(ent:GetClass())=="prop_physics")then
+						ent:GetPhysicsObject():SetVelocity(Vector(0,0,500))
+						timer.Simple(3,function()
+							if(ent:IsValid())then
+								ent:Remove()
+							end
+						end)
+					end
+				end
 				if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then 
 					if((wepsdamagealt[wep:GetClass()] or wepdmglist[wep:GetClass()] or 1) < 0)then --heal weapon?
 						--do something?

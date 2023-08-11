@@ -157,6 +157,7 @@ entitiesdmg={
 }
 function GM:EntityTakeDamage(ent, dmginfo)
 	local attacker = dmginfo:GetAttacker()
+	if(ent:IsNPC())then return end
 	if(ent:CreatedByMap())then --You may not cheat by stand on map props
 		if(string.lower(ent:GetClass())=="func_physbox")then
 			ent:GetPhysicsObject():SetVelocity(Vector(0,0,500))

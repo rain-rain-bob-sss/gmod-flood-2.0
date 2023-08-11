@@ -21,6 +21,7 @@ function GM:RiseAllWaterControllers()
 		v:Fire("open")
 		if(game.GetMap()=="flood_construct")then
 			v:Fire("setspeed",150)
+			v:SetKeyValue('MoveDistance','3100')
 		end
 	end
 end
@@ -31,3 +32,4 @@ function GM:LowerAllWaterControllers()
 		v:Fire("setspeed",600)
 	end
 end
+

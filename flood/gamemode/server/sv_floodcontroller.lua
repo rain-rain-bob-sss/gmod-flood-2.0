@@ -19,6 +19,9 @@ end
 function GM:RiseAllWaterControllers()
 	for k,v in pairs(GetWaterControllers()) do
 		v:Fire("open")
+		if(game.GetMap()=="flood_construct")then
+			v:Fire("setspeed",300)
+		end
 	end
 end
 

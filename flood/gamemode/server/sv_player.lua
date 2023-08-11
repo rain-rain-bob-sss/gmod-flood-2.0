@@ -316,11 +316,11 @@ function GM:PurchaseProp(ply, cmd, args)
 							return false --You may not undo.
 						end
 					end
-					undo.Create("Prop["..prop:EntIndex().."]".." $"..tostring(pp))
+					undo.Create("Prop["..ent:EntIndex().."]".." $"..tostring(pp))
 					--undo.AddEntity(ent)
 					undo.AddFunction(undofunc,pp)
 					undo.SetPlayer(ply)
-					undo.Finish("Prop["..prop:EntIndex().."]".." $"..tostring(pp))
+					undo.Finish("Prop["..ent:EntIndex().."]".." $"..tostring(pp))
 					ct:AddText("[Flood] ", Color(132, 199, 29, 255))
 					ct:AddText("You have purchased a(n) "..Prop.Description..".")
 					ct:Send(ply)

@@ -27,8 +27,9 @@ flood_wh_damage - How much damage a player takes per cycle (def: 1)
 flood_wh_tick - Water Hurt delay
 
 
-Workshop: http://steamcommunity.com/sharedfiles/filedetails/?id=474900236  
+Flood 2.0 Workshop: http://steamcommunity.com/sharedfiles/filedetails/?id=474900236  
+Flood 2.2 Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3016332015    
 
 
-Projects to use flood:
+Projects to use flood 2.0:
   https://github.com/WTC-GhostCommunity/The-Purge-Gamemode

@@ -172,6 +172,10 @@ function GM:ResetPhase()
 
 				-- Wait till they respawn
 				timer.Simple(0, function()
+					local ct = ChatText()
+					ct:AddText('[Flood]',Color(0,255,0))
+					ct:AddText('You destoryed '..v.Destroyedpropscount .. ' Props!')
+					ct:Send(v)
 					v:StripWeapons()
 					v:RemoveAllAmmo()
 					v:SetHealth(100)

@@ -50,7 +50,7 @@ local xSize = x * 0.2
 local ySize = y * 0.04
 local bWidth = Spacer + xSize + Spacer
 local bHeight = Spacer + ySize + Spacer
-local drawhp=100
+local drawhp
 
 net.Receive("RoundState", function(len)
    GameState = net.ReadFloat()
@@ -63,7 +63,7 @@ local function mylerp(f,t,fr)
    return f+(t-f)*fr
 end
 function GM:HUDPaint()
-
+   if(not drawhp)then drawhp=LocalPlayer():Health() end
    if BuildTimer and FloodTimer and FightTimer and ResetTimer then
 	   if GameState == 0 then
 		   draw.RoundedBoxEx(6, xPos, y * 0.005, x * 0.175,  x * 0.018, active_color, true, true, false, false)
@@ -157,7 +157,7 @@ function GM:HUDPaint()
 	   -- Health
 	   local pHealth = LocalPlayer():Health()
 	   drawhp=math.Clamp(drawhp,0,100) --So it wont take alot time from 100000 to 100
-	   drawhp=math.Approach(drawhp,pHealth,FrameTime()*40)
+	   drawhp=math.Approach( drawhp , pHealth , FrameTime()* (( pHealth - drawhp )/0.5) )
 	   local pHealthClamp = math.Clamp(drawhp / 100, 0, 1)
 	   local pHealthWidth = (xSize - Spacer) * pHealthClamp
 	   local shake={0,0}

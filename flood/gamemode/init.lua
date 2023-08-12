@@ -88,15 +88,6 @@ _ha('PlayerSpawnEffect','No spawn effect exploit.',function(p,c)
 		return false
 	end
 end)
-local function PlayerIsFriend(ply, ply2)
-	if not IsValid(ply) or not IsValid(ply2) then return end
-
-	for k, v in pairs(ply:CPPIGetFriends()) do
-		if v == ply2 then return true end 
-	end
-
-	return false 
-end
 function GM:Initialize()
 	self.ShouldHaltGamemode = false
 	self:InitializeRoundController()
@@ -155,6 +146,15 @@ wepsdamagealt={
 entitiesdmg={
 
 }
+local function PlayerIsFriend(ply, ply2)
+	if not IsValid(ply) or not IsValid(ply2) then return end
+
+	for k, v in pairs(ply:CPPIGetFriends()) do
+		if v == ply2 then return true end 
+	end
+
+	return false 
+end
 function GM:EntityTakeDamage(ent, dmginfo)
 	local attacker = dmginfo:GetAttacker()
 	if(ent:IsNPC())then return end
@@ -209,8 +209,10 @@ function GM:EntityTakeDamage(ent, dmginfo)
 						--print(wepsdamagealt[wep:GetClass()])
 						ent:SetNWInt("CurrentPropHealth", math.min(ent:GetNWInt("BasePropHealth"),ent:GetNWInt("CurrentPropHealth") - damage))
 					end
-					if(damage*mul>0)then
-						attacker:AddCash(math.floor(damage*mul))
+					if(GAMEMODE:GetGameState()~=4)then
+						if(damage*mul>0)then
+							attacker:AddCash(math.floor(damage*mul))
+						end
 					end
 				--end
 			else
@@ -227,6 +229,8 @@ function GM:EntityTakeDamage(ent, dmginfo)
 				end
 				if(GAMEMODE:GetGameState()==4)then
 					attacker:AddCash(15)
+				else
+					attacker.Destroyedpropscount=attacker.Destroyedpropscount+1
 				end
 				ent:Remove()
 			end

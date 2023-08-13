@@ -1,7 +1,7 @@
-SWEP.Author			= "Hxrmn, HOLOGRAPHICpizza"
+SWEP.Author			= "Hxrmn, HOLOGRAPHICpizza| Edited by rain bob"
 SWEP.Contact		= "mcraft@peak15.org"
 SWEP.Purpose		= "A Grappling Hook"
-SWEP.Instructions	= "Left click to fire"
+SWEP.Instructions	= "Left click to fire\n so you can move your boat"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= false
@@ -155,13 +155,16 @@ function SWEP:UpdateAttack()
 			if(self.dt == 0) then
 			zVel = self.Owner:GetVelocity().z
 			vVel = vVel:GetNormalized()*(math.Clamp(Distance,0,7))
+			vVel.z=0
 				if( SERVER ) then
-				local gravity = GetConVarNumber("sv_Gravity")
-				vVel:Add(Vector(0,0,(gravity/100)*1.5)) -- Player speed. DO NOT MESS WITH THIS VALUE!
-				if(zVel < 0) then
-					vVel:Sub(Vector(0,0,zVel/100))
-				end
-				self.Owner:SetVelocity(vVel)
+					local gravity = GetConVarNumber("sv_Gravity")
+					--vVel:Add(Vector(0,0,(gravity/100)*1.5)) -- Player speed. DO NOT MESS WITH THIS VALUE!
+					--if(zVel < 0) then
+					--	vVel:Sub(Vector(0,0,zVel/100))
+					--end
+					pcall(function()
+						self.Owner:GetGroundEntity():SetVelocity(vVel)
+					end)
 				end
 			end
 	

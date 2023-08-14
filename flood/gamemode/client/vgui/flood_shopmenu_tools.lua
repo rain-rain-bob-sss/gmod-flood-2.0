@@ -55,8 +55,9 @@ function PANEL:AddCategory(Name, Label, tItems)
 				if tobool(tools[3]) == true then
 					local item = Category:Add(v.Text)
 					item.DoClick = function(button)
+						spawnmenu.ActivateTool(button.Name)
 						self:CreateCP(button)
-						LocalPlayer():ConCommand(v.Command)
+						--LocalPlayer():ConCommand(v.Command)
 					end
 
 					item.ControlPanelBuildFunction = v.CPanelFunction
@@ -84,7 +85,7 @@ function PANEL:CreateCP( button )
  		cp:FillViaTable( button ) 
  	end 
  	 
- 	self.Content:Clear() 
+ 	--self.Content:Clear() 
  	self.Content:AddItem(cp) 
  	self.Content:Rebuild() 
  	cp:SetVisible( true )

@@ -17,13 +17,15 @@ function GM:CheckForWaterControllers()
 end
 
 function GM:RiseAllWaterControllers()
-	for k,v in pairs(GetWaterControllers()) do
-		v:Fire("open")
-		if(game.GetMap()=="flood_construct")then
-			v:Fire("setspeed",150)
-			v:SetKeyValue('MoveDistance','3100')
+	timer.Simple(5,function() --gave players time to ready
+		for k,v in pairs(GetWaterControllers()) do
+			v:Fire("open")
+			if(game.GetMap()=="flood_construct")then
+				v:Fire("setspeed",190)
+				v:SetKeyValue('MoveDistance','3200')
+			end
 		end
-	end
+	end)
 end
 
 function GM:LowerAllWaterControllers()

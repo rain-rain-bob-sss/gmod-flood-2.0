@@ -50,10 +50,10 @@ function PANEL:AddCategory(Name, Label, tItems)
 	end
 	Category:SetCookieName("ToolMenu." .. tostring(Name))
 	for k, v in pairs(tItems) do
-		for _, tools in pairs(self.ToolTable) do
+		for k_, tools in pairs(self.ToolTable) do
 			if tostring(v.ItemName) == tostring(tools[1]) then
 				if tobool(tools[3]) == true then
-					local item = Category:Add(v.Text)
+					local item = Category:Add(v.Text or k_)
 					item.DoClick = function(button)
 						spawnmenu.ActivateTool(button.Name)
 						self:CreateCP(button)

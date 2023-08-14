@@ -57,6 +57,7 @@ function PANEL:AddCategory(Name, Label, tItems)
 					item.DoClick = function(button)
 						self:CreateCP(button)
 						LocalPlayer():ConCommand(v.Command)
+						spawnmenu.ActivateTool(button.Name)
 					end
 
 					item.ControlPanelBuildFunction = v.CPanelFunction

@@ -146,15 +146,6 @@ wepsdamagealt={
 entitiesdmg={
 
 }
-local function PlayerIsFriend(ply, ply2)
-	if not IsValid(ply) or not IsValid(ply2) then return end
-
-	for k, v in pairs(ply:CPPIGetFriends()) do
-		if v == ply2 then return true end 
-	end
-
-	return false 
-end
 function GM:EntityTakeDamage(ent, dmginfo)
 	local attacker = dmginfo:GetAttacker()
 	if(ent:IsNPC())then return end
@@ -183,7 +174,8 @@ function GM:EntityTakeDamage(ent, dmginfo)
 			if attacker:IsPlayer() then
 				local wep = dmginfo:GetAttacker():GetActiveWeapon():IsValid() and dmginfo:GetAttacker():GetActiveWeapon() or dmginfo:GetInflictor()
 				--print(wep:GetClass())
-				if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then 
+				--if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then 
+				if(NADMOD.IsFriendProp(ent,attacker))then 
 					if((wepsdamagealt[wep:GetClass()] or wepdmglist[wep:GetClass()] or 1) < 0)then --heal weapon?
 						--do something?
 					else

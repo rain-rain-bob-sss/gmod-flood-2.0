@@ -2,6 +2,7 @@ local PlayerMeta = FindMetaTable("Player")
 
 function GM:PlayerInitialSpawn(ply)
 	ply.Destroyedpropscount=0
+	ply.propused={}
 	ply.Allow = false
  
 	local data = { }
@@ -30,6 +31,7 @@ end
 
 function GM:PlayerSpawn( ply )
 	ply.Destroyedpropscount=0
+	ply.propuser={}
 	player_manager.SetPlayerClass( ply, "player_flood" ) -- USE THIS SHIT
 	hook.Call( "PlayerLoadout", GAMEMODE, ply )
 	hook.Call( "PlayerSetModel", GAMEMODE, ply )

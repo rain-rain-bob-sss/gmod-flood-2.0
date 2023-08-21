@@ -374,9 +374,14 @@ function GM:PurchaseWeapon(ply, cmd, args)
 			ct:Send(ply)
 			return
 		else
-			if Weapon.DonatorOnly == true and not ply:IsDonator() then 
+			if Weapon.DonatorOnly == true and not ply:IsDonator() and not ply:IsDev() then 
 				ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 				ct:AddText(Weapon.Name.." is a donator only item!")
+				ct:Send(ply)
+				return 
+			elseif Weapon.DevOnly==true and not ply:IsDev()then
+				ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+				ct:AddText(Weapon.Name.." is a dev only item!")
 				ct:Send(ply)
 				return 
 			else

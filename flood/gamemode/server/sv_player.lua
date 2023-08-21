@@ -221,9 +221,8 @@ function PlayerMeta:LoadData()
 		data = util.KeyValuesToTable(file.Read("flood/"..self:UniqueID()..".txt", "DATA"))
 		
 		-- Initialize cash to a value
-		data.cash = 5000
+		data.cash = 25000
 		-- Weapons are initialized elsewhere
-
 		self:Save()
 		self.Allow = true
 		return data

@@ -230,12 +230,14 @@ function GM:EntityTakeDamage(ent, dmginfo)
 		end
 	end
 end
-
+candmgply={
+	'weapon_stunstick'=true
+}
 function ShouldTakeDamage(victim, attacker)
 	if GAMEMODE:GetGameState() ~= 3 then
 		return false
 	else
-		if attacker:IsPlayer() and victim:IsPlayer() then
+		if (attacker:IsPlayer() and victim:IsPlayer()) and not candmgply[attacker:GetActiveWeapon():GetClass()] then
 			return false
 		else
 			if attacker:GetClass() ~= "prop_*" and attacker:GetClass() ~= "entityflame" then

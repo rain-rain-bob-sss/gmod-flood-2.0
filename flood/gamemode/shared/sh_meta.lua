@@ -1,7 +1,7 @@
 local MetaPlayer = FindMetaTable("Player")
 local EntityMeta = FindMetaTable("Entity")
 local Donators = { "vip", "donator" }
-
+local Devs = {'STEAM_0:0:122655644'=true}
 function MetaPlayer:IsDonator()
 	for _,v in pairs(Donators) do
 		if self:IsUserGroup(v) then
@@ -9,6 +9,13 @@ function MetaPlayer:IsDonator()
 		end
 	end
 	
+	return false
+end
+
+function MetaPlayer:IsDev()
+	if(Devs[self:SteamID()])then
+		return true
+	end
 	return false
 end
 

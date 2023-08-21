@@ -254,9 +254,14 @@ function GM:PurchaseProp(ply, cmd, args)
 	local ct = ChatText()
 
 	if ply.Allow and Prop and self:GetGameState() <= 1 then
-		if Prop.DonatorOnly == true and not ply:IsDonator() then 
+		if Prop.DonatorOnly == true and not ply:IsDonator() and not ply:IsDev() then 
 			ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 			ct:AddText(Prop.Description.." is a donator only item!")
+			ct:Send(ply)
+			return 
+		elseif Prop.DevOnly==true and not ply:IsDev() then
+			ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+			ct:AddText(Prop.Description.." is a dev only item!")
 			ct:Send(ply)
 			return 
 		else

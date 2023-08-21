@@ -180,7 +180,7 @@ function GM:ResetPhase()
 					v:RemoveAllAmmo()
 					v:SetHealth(100)
 					v:SetArmor(0)
-
+					v.Destoryedpropscount=0
 					timer.Simple(0, function()
 						v:Give("gmod_tool")
 						v:Give("weapon_physgun")

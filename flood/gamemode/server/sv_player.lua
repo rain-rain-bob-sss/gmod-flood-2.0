@@ -30,7 +30,7 @@ function GM:PlayerInitialSpawn(ply)
 end
 
 function GM:PlayerSpawn( ply )
-	ply.Destroyedpropscount=0
+	--ply.Destroyedpropscount=0
 	ply.propuser={}
 	player_manager.SetPlayerClass( ply, "player_flood" ) -- USE THIS SHIT
 	hook.Call( "PlayerLoadout", GAMEMODE, ply )

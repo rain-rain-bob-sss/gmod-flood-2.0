@@ -78,7 +78,7 @@ function SWEP:StartAttack()
 	local distance = math.sqrt(x + y + z);
 	
 	-- Only latches if distance is less than distance CVAR, or CVAR negative
-	local distanceCvar = GetConVarNumber("grapple_distance")
+	local distanceCvar = 10000
 	inRange = false
 	if distanceCvar < 0 or distance <= distanceCvar then
 		inRange = true
@@ -100,7 +100,7 @@ function SWEP:StartAttack()
 		end
 		
 		self:DoTrace()
-		self.speed = 10000 -- Rope latch speed. Was 3000.
+		self.speed = 5000 -- Rope latch speed. Was 3000.
 		self.startTime = CurTime()
 		self.endTime = CurTime() + self.speed
 		self.dt = -1

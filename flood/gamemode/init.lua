@@ -188,9 +188,9 @@ function GM:EntityTakeDamage(ent, dmginfo)
 					local mul = GetConVar("flood_damage_cashmul"):GetFloat()
 					local damage = 0
 					if wep:GetClass() == "weapon_pistol" then
-						damage=1
+						damage=4
 						if(GAMEMODE:GetGameState()==4)then
-							damage=damage*20
+							damage=damage*100
 						end
 						ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - damage)
 					else

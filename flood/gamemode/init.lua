@@ -141,7 +141,7 @@ for _, Weapon in pairs(Weapons) do
 end
 wepsdamagealt={
 	rpg_missile=wepdmglist["weapon_rpg"],
-	weapon_stunstick=-5
+	weapon_stunstick=50000
 }
 entitiesdmg={
 

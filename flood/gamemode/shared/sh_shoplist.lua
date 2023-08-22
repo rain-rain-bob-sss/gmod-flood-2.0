@@ -42,7 +42,7 @@ Props[25] = {Model = "models/props_interiors/VendingMachineSoda01a.mdl", Group =
 Props[26] = {Model = "models/props_interiors/VendingMachineSoda01a_door.mdl", Group = 1, Price = 600, Health = 300, DonatorOnly = false, Description = "Vending Machine Door"}
 Props[27] = {Model = "models/props_building_details/Storefront_Template001a_Bars.mdl", Group = 2, Price = 300, Health = 350, DonatorOnly = false, Description = "Window Bars"}
 Props[28] = {Model = "models/props_borealis/bluebarrel001.mdl", Group = 1, Price = 50, Health = 120, DonatorOnly = false, Description = "Gravestone"}
-Props[29]
+--Props[29]
 -- Weapons
 Weapons[1] = {Model = "models/weapons/w_crossbow.mdl", Group = 1, Class = "weapon_crossbow", Name = "Crossbow", Price = 15000, Ammo = 1000, AmmoClass = "XBowBolt", Damage = 50, DonatorOnly = false}
 Weapons[2] = {Model = "models/weapons/w_rocket_launcher.mdl", Group = 1, Class = "weapon_rpg", Name = "RPG", Price = 37500, Ammo = 3, AmmoClass = "RPG_Round", Damage = 20, DonatorOnly = false}
@@ -56,7 +56,7 @@ Weapons[10] = {Model = "models/weapons/w_irifle.mdl", Group = 1, Class = "weapon
 Weapons[11] = {Model = "models/weapons/w_Physics.mdl",Group=1,Class='weapon_physcannon',Name="Pusher",Price=1500,Ammo=0,AmmoClass="",Damage=-0.1}
 Weapons[12] = {Model = "models/weapons/w_stunbaton.mdl",Group=1,Class='weapon_stunstick',Name="Super stick",Price=0,Ammo=0,AmmoClass="",DevOnly=true}
 if(istable(weapons.Get('weapon_xdefm_rod')))then
-  table.insert(Weapons,{Model="models/oc_diving/rod.mdl",Group=2,Class="weapon_xdefm_rod",Name="Fishing rod",Price=-1,Ammo=0,AmmoClass="",Damage=0})
-  table.insert(Weapons,{Model="models/weapons/w_package.mdl",Group=2,Class="weapon_xdefm_inventory",Name="Fishing Inventory",Price=-5,Ammo=0,AmmoClass="",Damage=0})
-  table.insert(Weapons,{Model="models/weapons/w_suitcase_passenger.mdl",Group=2,Class="weapon_xdefm_trade",Name="Fishing Trace",Price=-10,Ammo=0,AmmoClass="",Damage=0})
+  table.insert(Weapons,{description="Model from oc_diving_v9 huh?",Model="models/oc_diving/rod.mdl",Group=2,Class="weapon_xdefm_rod",Name="Fishing rod",Price=-1,Ammo=0,AmmoClass="",Damage=0})
+  table.insert(Weapons,{description="THE INVENTORY"Model="models/weapons/w_package.mdl",Group=2,Class="weapon_xdefm_inventory",Name="Fishing Inventory",Price=-5,Ammo=0,AmmoClass="",Damage=0})
+  table.insert(Weapons,{description="LETS GO TRADE!",Model="models/weapons/w_suitcase_passenger.mdl",Group=2,Class="weapon_xdefm_trade",Name="Fishing Trace",Price=-10,Ammo=0,AmmoClass="",Damage=0})
 end

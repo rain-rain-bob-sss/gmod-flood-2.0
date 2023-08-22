@@ -57,6 +57,6 @@ Weapons[11] = {Model = "models/weapons/w_Physics.mdl",Group=1,Class='weapon_phys
 Weapons[12] = {Model = "models/weapons/w_stunbaton.mdl",Group=1,Class='weapon_stunstick',Name="Super stick",Price=0,Ammo=0,AmmoClass="",DevOnly=true}
 if(istable(weapons.Get('weapon_xdefm_rod')))then
   table.insert(Weapons,{description="Model from oc_diving_v9 huh?",Model="models/oc_diving/rod.mdl",Group=2,Class="weapon_xdefm_rod",Name="Fishing rod",Price=-1,Ammo=0,AmmoClass="",Damage=0})
-  table.insert(Weapons,{description="THE INVENTORY"Model="models/weapons/w_package.mdl",Group=2,Class="weapon_xdefm_inventory",Name="Fishing Inventory",Price=-5,Ammo=0,AmmoClass="",Damage=0})
+  table.insert(Weapons,{description="THE INVENTORY",Model="models/weapons/w_package.mdl",Group=2,Class="weapon_xdefm_inventory",Name="Fishing Inventory",Price=-5,Ammo=0,AmmoClass="",Damage=0})
   table.insert(Weapons,{description="LETS GO TRADE!",Model="models/weapons/w_suitcase_passenger.mdl",Group=2,Class="weapon_xdefm_trade",Name="Fishing Trace",Price=-10,Ammo=0,AmmoClass="",Damage=0})
 end

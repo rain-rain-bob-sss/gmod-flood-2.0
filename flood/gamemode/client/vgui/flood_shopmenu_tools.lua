@@ -48,28 +48,43 @@ function PANEL:AddCategory(Name, Label, tItems)
 		draw.RoundedBox(4, 0, 0, w, h, Color(240, 240, 240, 255))
 		draw.RoundedBoxEx(4, 0, 0, w, self.Header:GetTall(), Color(24, 24, 24, 255), true, true, false, false)
 	end
+	validTools = {}
 	Category:SetCookieName("ToolMenu." .. tostring(Name))
-	for k, v in pairs(tItems) do
+	for k,item in pairs(tItems) do
 		for k_, tools in pairs(self.ToolTable) do
-			if tostring(v.ItemName) == tostring(tools[1]) then
+			if tostring(item.ItemName) == tostring(tools[1]) then
+			--if tostring(v.ItemName) == tostring(tools[1]) then
 				if tobool(tools[3]) == true then
-					local item = Category:Add(v.Text or k_)
-					item.DoClick = function(button)
-						spawnmenu.ActivateTool(button.Name)
-						self:CreateCP(button)
-						--LocalPlayer():ConCommand(v.Command)
-					end
-
-					item.ControlPanelBuildFunction = v.CPanelFunction
-					item.Command = v.Command
-					item.Name = v.ItemName
-					item.Controls = v.Controls
-					item.Text = v.Text
+					table.insert(validTools, item)
 				end
 			end
 		end
 	end
-	self:InvalidateLayout()
+	if next(validTools) ~= nil then
+		local Category = self.List:Add(Label)
+		Category.Paint = function(self, w, h)
+			draw.RoundedBox(4, 0, 0, w, h, Color(240, 240, 240, 255))
+			draw.RoundedBoxEx(4, 0, 0, w, self.Header:GetTall(), Color(24, 24, 24, 255), true, true, false, false)
+		end
+		Category:SetCookieName("ToolMenu." .. tostring(Name))
+
+		for _, tool in pairs(validTools) do
+			local item = Category:Add(tool.Text)
+			item.DoClick = function(button)
+				self:CreateCP(button)
+				LocalPlayer():ConCommand(tool.Command)
+			end
+
+			item.ControlPanelBuildFunction = tool.CPanelFunction
+			item.Command = tool.Command
+			item.Name = tool.ItemName
+			item.Controls = tool.Controls
+			item.Text = tool.Text
+		end
+
+		self:InvalidateLayout()
+	end
+	--self:InvalidateLayout()
 end
 
 function PANEL:CreateCP( button ) 

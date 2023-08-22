@@ -95,7 +95,7 @@ function PANEL:CreateCP( button )
  		cp:FillViaTable( button ) 
  	end 
  	 
- 	--self.Content:Clear() 
+ 	self.Content:Clear() 
  	self.Content:AddItem(cp) 
  	self.Content:Rebuild() 
  	cp:SetVisible( true )

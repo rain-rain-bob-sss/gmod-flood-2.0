@@ -23,6 +23,7 @@ function GM:CheckForWinner()
 	if self:GetGameState() == 3 then
 		local players = self:GetActivePlayers()
 		local count = #players
+		local winner=nil
 		if count == 1 then winner = players[1] end
 
 		-- Determine team conditions

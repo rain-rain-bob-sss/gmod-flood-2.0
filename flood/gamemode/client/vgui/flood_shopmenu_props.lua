@@ -36,7 +36,7 @@ function PANEL:Init()
 		for k, v in pairs(Props) do	
 			local ItemIcon = vgui.Create("SpawnIcon", self)
 			ItemIcon:SetModel(v.Model)
-			ItemIcon:SetSize(55,55)
+			ItemIcon:SetSize(80,80)
 			ItemIcon.DoClick = function() 
 				RunConsoleCommand("FloodPurchaseProp", k)
 				surface.PlaySound("ui/buttonclick.wav")		

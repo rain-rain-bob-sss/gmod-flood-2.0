@@ -43,13 +43,8 @@ function PANEL:Init()
 end
 
 function PANEL:AddCategory(Name, Label, tItems)
-	local Category = self.List:Add(Label)
-	Category.Paint = function(self, w, h)
-		draw.RoundedBox(4, 0, 0, w, h, Color(240, 240, 240, 255))
-		draw.RoundedBoxEx(4, 0, 0, w, self.Header:GetTall(), Color(24, 24, 24, 255), true, true, false, false)
-	end
+	
 	validTools = {}
-	Category:SetCookieName("ToolMenu." .. tostring(Name))
 	for k,item in pairs(tItems) do
 		for k_, tools in pairs(self.ToolTable) do
 			if tostring(item.ItemName) == tostring(tools[1]) then

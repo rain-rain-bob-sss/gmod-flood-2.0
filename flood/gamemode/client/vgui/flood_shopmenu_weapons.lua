@@ -36,7 +36,7 @@ function PANEL:Init()
 		for k, v in pairs(Weapons) do	
 			local ItemIcon = vgui.Create("SpawnIcon", self)
 			ItemIcon:SetModel(v.Model)
-			ItemIcon:SetSize(55,55)
+			ItemIcon:SetSize(150,150)
 			ItemIcon.DoClick = function() 
 				RunConsoleCommand("FloodPurchaseWeapon", k)
 				surface.PlaySound("ui/buttonclick.wav")		

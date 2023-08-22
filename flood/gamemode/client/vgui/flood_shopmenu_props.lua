@@ -42,7 +42,7 @@ function PANEL:Init()
 				surface.PlaySound("ui/buttonclick.wav")		
 			end
 
-			if v.Description and v.Health and v.Price then ItemIcon:SetToolTip(Format("%s", "Name: "..v.Description.."\nHealth: "..v.Health.."\nPrice: $"..v.Price.."\nDescription"..v.rdescription or "No Description.")) 
+			if v.Description and v.Health and v.Price then ItemIcon:SetToolTip(Format("%s", "Name: "..v.Description.."\nHealth: "..v.Health.."\nPrice: $"..v.Price.."\nDescription"..(v.rdescription or "No Description."))) 
 			else ItemIcon:SetToolTip(Format("%s", "Failed to load tooltip - Missing Description")) end
 
 			if v.Group then self.FloodPropIconList[v.Group]:AddItem(ItemIcon) end

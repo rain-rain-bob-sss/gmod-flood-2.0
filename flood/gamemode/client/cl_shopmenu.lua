@@ -15,3 +15,8 @@ function GM:OnSpawnMenuClose()
 	RememberCursorPosition()
 	gui.EnableScreenClicker(false)
 end
+concommand.Add('fm_spawnmenureload',function()
+	if self.ShopMenu then
+		self.ShopMenu=nil
+	end
+end)

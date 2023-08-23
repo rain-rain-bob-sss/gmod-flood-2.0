@@ -175,7 +175,7 @@ function GM:EntityTakeDamage(ent, dmginfo)
 				local wep = dmginfo:GetAttacker():GetActiveWeapon():IsValid() and dmginfo:GetAttacker():GetActiveWeapon() or dmginfo:GetInflictor()
 				--print(wep:GetClass())
 				--if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then 
-				if(NADMOD.IsFriendProp(ent,attacker) or attacker=ent:CPPIGetOwner())then 
+				if(NADMOD.IsFriendProp(ent,attacker) or attacker==ent:CPPIGetOwner())then 
 					if((wepsdamagealt[wep:GetClass()] or wepdmglist[wep:GetClass()] or 1) < 0)then --heal weapon?
 						--do something?
 					else

@@ -46,12 +46,22 @@ function GM:CanTool(ply, tr, tool)
 				return false
 			else
 				if tobool(tools[2]) == true then
-					if ply:IsAdmin() or ply:IsDonator()then
+					if ply:IsAdmin() or ply:IsDonator() or ply:IsDev() then
 						return true
 					else
 						local ct = ChatText()
 						ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 						ct:AddText(tool.." is a donator only tool!")
+						ct:Send(ply)
+						return false
+					end
+				elseif tobool(tools[3]) == true then
+					if(ply:IsDev())then
+						return true
+					else
+						local ct = ChatText()
+						ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+						ct:AddText(tool.." is a dev only tool!")
 						ct:Send(ply)
 						return false
 					end

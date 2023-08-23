@@ -16,7 +16,7 @@ function GM:OnSpawnMenuClose()
 	gui.EnableScreenClicker(false)
 end
 concommand.Add('fm_spawnmenureload',function()
-	if self.ShopMenu then
-		self.ShopMenu=nil
+	if GAMEMODE.ShopMenu then
+		GAMEMODE.ShopMenu=nil
 	end
 end)

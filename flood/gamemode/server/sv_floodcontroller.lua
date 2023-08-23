@@ -17,6 +17,10 @@ function GM:CheckForWaterControllers()
 end
 
 function GM:RiseAllWaterControllers()
+	for i,v in ipairs(player.GetAll())do
+		v:SetHealth(100)
+		v:SetArmor(0)
+	end
 	timer.Simple(5,function() --gave players time to ready
 		for k,v in pairs(GetWaterControllers()) do
 			v:Fire("open")
@@ -32,6 +36,10 @@ function GM:LowerAllWaterControllers()
 	for k,v in pairs(GetWaterControllers()) do
 		v:Fire("close")
 		v:Fire("setspeed",600)
+	end
+	for i,v in ipairs(player.GetAll())do
+		v:SetHealth(100)
+		v:SetArmor(0)
 	end
 end
 

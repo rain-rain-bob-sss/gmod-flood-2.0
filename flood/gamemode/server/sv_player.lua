@@ -177,6 +177,7 @@ function GM:PlayerShouldTaunt( ply, actid )
 end
 
 function GM:CanPlayerSuicide(ply)
+	ply:Spawn()
 	return false --????
 end
 
@@ -314,6 +315,7 @@ function GM:PurchaseProp(ply, cmd, args)
 					ent:SetHealth(999999999)
 					ent:SetNWInt("CurrentPropHealth", math.floor(Prop.Health))
 					ent:SetNWInt("BasePropHealth", math.floor(Prop.Health))
+					ent:SetNWInt("FM_Price", math.floor(Prop.Price))
 					local undofunc=function(t,ent,money)
 						if(ent:IsValid() and (not ent.flood_trashed))then
 							ply:AddCash(money)

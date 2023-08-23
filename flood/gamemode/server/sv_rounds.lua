@@ -116,7 +116,7 @@ function GM:RefundAllProps()
 			if v:CPPIGetOwner() ~= nil and v:CPPIGetOwner() ~= NULL and v:CPPIGetOwner() ~= "" then
 				local Currenthealth = tonumber(v:GetNWInt("CurrentPropHealth"))
 				local Basehealth = tonumber(v:GetNWInt("BasePropHealth"))
-				local PropPrice = tonumber(v:GetNwInt('FM_Price'))
+				local PropPrice = tonumber(v:GetNWInt('FM_Price'))
 				local Recieve = (Currenthealth / Basehealth) * PropPrice
 				if Recieve > 0 then
 					v:Remove()

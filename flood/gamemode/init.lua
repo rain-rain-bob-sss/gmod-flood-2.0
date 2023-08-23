@@ -44,10 +44,10 @@ CreateConVar("flood_wh_damage", 1, FCVAR_NOTIFY, "How much damage a player takes
 CreateConVar("flood_wh_tick", 0.125, FCVAR_NOTIFY, "How many second to takes (def: 0.5)")
 
 -- Prop Limits
-CreateConVar("flood_max_player_props", 20, FCVAR_NOTIFY, "How many props a player can spawn (def: 30)")
-CreateConVar("flood_max_donator_props", 30, FCVAR_NOTIFY, "How many props a donator can spawn (def: 30)")
-CreateConVar("flood_max_admin_props", 40, FCVAR_NOTIFY, "How many props an admin can spawn (def: 40)")
-CreateConVar("flood_max_sadmin_props", 40, FCVAR_NOTIFY, "How many props an superadmin can spawn (def: 40)")
+CreateConVar("flood_max_player_props", 16, FCVAR_NOTIFY, "How many props a player can spawn (def: 30)")
+CreateConVar("flood_max_donator_props", 16, FCVAR_NOTIFY, "How many props a donator can spawn (def: 30)")
+CreateConVar("flood_max_admin_props", 16, FCVAR_NOTIFY, "How many props an admin can spawn (def: 40)")
+CreateConVar("flood_max_sadmin_props", 16, FCVAR_NOTIFY, "How many props an superadmin can spawn (def: 40)")
 _ha('PlayerSpawnSENT','No spawn sent exploit.',function(p,c)
 	if(p:IsSuperAdmin())then 
 		return true

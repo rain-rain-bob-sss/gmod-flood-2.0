@@ -99,17 +99,6 @@ function GM:BuildPhase()
 			v:SetArmor(0)
 		end
 
-		-- Remove teh shitty windows that are above players.
-		for _, v in pairs(ents.FindByClass("func_breakable")) do
-			v:Fire("Break", "", 0)
-		end
-		for _, v in pairs(ents.FindByClass("trigger_teleport")) do
-			v:Fire("Kill", "", 0)
-		end
-		for _, v in pairs(ents.FindByClass("trigger_hurt")) do
-			v:Fire("Kill", "", 0)
-		end
-
 		-- Unfreeze everything
 		for _, v in pairs(ents.GetAll()) do
 			if IsValid(v) then
@@ -137,6 +126,16 @@ function GM:FloodPhase()
 		-- Its time to fight!
 		self:GivePlayerWeapons()
 	else  
+		-- Remove teh shitty windows that are above players.
+		for _, v in pairs(ents.FindByClass("func_breakable")) do
+			v:Fire("Break", "", 0)
+		end
+		for _, v in pairs(ents.FindByClass("trigger_teleport")) do
+			v:Fire("Kill", "", 0)
+		end
+		for _, v in pairs(ents.FindByClass("trigger_hurt")) do
+			--v:Fire("Kill", "", 0)
+		end
 		Flood_floodTime = Flood_floodTime - 1
 	end
 end
@@ -180,13 +179,13 @@ function GM:ResetPhase()
 					v:RemoveAllAmmo()
 					v:SetHealth(100)
 					v:SetArmor(0)
-					v.Destoryedpropscount=0
+					v.Destroyedpropscount=0
 					timer.Simple(0, function()
-						v:Give("gmod_tool")
-						v:Give("weapon_physgun")
-						v:Give("flood_propseller")
+						--v:Give("gmod_tool")
+						--v:Give("weapon_physgun")
+						--v:Give("flood_propseller")
 
-						v:SelectWeapon("weapon_physgun")
+						--v:SelectWeapon("weapon_physgun")
 					end)
 				end)
 			end

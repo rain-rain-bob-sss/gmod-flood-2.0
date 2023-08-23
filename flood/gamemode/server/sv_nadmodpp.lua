@@ -472,7 +472,8 @@ concommand.Add("npp_refreshfriends",function(ply,cmd,args)
 	if NADMOD.Users[ply:SteamID()] then friends = table.Copy(NADMOD.Users[ply:SteamID()].Friends) or {} end
 	if NADMOD.PPConfig["adminall"] then
 		for _,v in pairs(player.GetAll()) do
-			if NADMOD.IsPPAdmin(v) then friends[v:SteamID()] = true end
+			--Dafaq,its doesn't mean you should check it
+			--if NADMOD.IsPPAdmin(v) then friends[v:SteamID()] = true end
 		end
 	end
 	net.Start("nadmod_ppfriends")

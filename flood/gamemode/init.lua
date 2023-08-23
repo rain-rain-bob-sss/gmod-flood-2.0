@@ -240,7 +240,7 @@ concommand.Add('flood_candmg',function(p,c,a,as)
     if(p:IsSuperAdmin() or p==NULL or not p:IsValid())then
 	if(not wepdmgtoply[a[1]])then return end
       	if(not wepdmgtoply[a[2]])then return end
-        candmgply[a[1]]=tobool(wepdmgtoply[a[2])
+        candmgply[a[1]]=tobool(wepdmgtoply[a[2]])
     end
 end)
 function ShouldTakeDamage(victim, attacker)

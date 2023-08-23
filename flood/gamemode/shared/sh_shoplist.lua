@@ -37,7 +37,7 @@ Props[3] = {Model = "models/props_c17/oildrum001.mdl", Group = 2, Price = 60, He
 Props[4] = {Model = "models/props_c17/concrete_barrier001a.mdl", Group = 2, Price = 150, Health = 200, DonatorOnly = false, Description = "Concrete Barrier"}
 Props[5] = {Model = "models/props_c17/gravestone_coffinpiece002a.mdl", Group = 2, Price = 160, Health = 80, DonatorOnly = false, Description = "Coffin Piece"}
 Props[6] = {Model = "models/props_c17/display_cooler01a.mdl", Group = 2, Price = 860, Health = 430, DonatorOnly = false, Description = "Display Case"}
-Props[7] = {Model = "models/props_c17/bench01a.mdl", Group = 1, Price = 40, Health = 20, DonatorOnly = false, Description = "Wooden Bench"}
+Props[7] = {Model = "models/props_c17/bench01a.mdl", Group = 1, Price = 40, Health = 70, DonatorOnly = false, Description = "Wooden Bench"}
 Props[8] = {Model = "models/props_c17/FurnitureCouch001a.mdl", Group = 2, Price = 400, Health = 200, DonatorOnly = false, Description = "Red Couch"}
 Props[9] = {Model = "models/Combine_Helicopter/helicopter_bomb01.mdl", Group = 1, Price = 30, Health = 80, DonatorOnly = false, Description = "HeliBomb"}
 Props[10] = {Model = "models/props_c17/shelfunit01a.mdl", Group = 1, Price = 180, Health = 90, DonatorOnly = false, Description = "Wooden Shelf 1"}
@@ -79,7 +79,7 @@ if(istable(weapons.Get('weapon_xdefm_rod')))then
   Weapons[#Weapons+1]={description="LETS GO TRADE!",Model="models/weapons/w_suitcase_passenger.mdl",Group=2,Class="weapon_xdefm_trade",Name="Fishing Trace",Price=-10,Ammo=0,AmmoClass="",Damage=0}
 end
 GM:AddProp({Model="models/props_c17/FurnitureDrawer001a.mdl",Group=3,Name="Furniture Drawer",Health=40})
-GM:AddProp({Model="models/Items/item_item_crate.mdl",Group=3,Name="BOX"})
-GM:AddProp({Model="models/props_junk/watermelon01.mdl",Group=3,Name="MELON"})
-GM:AddProp({Model="models/props_trainstation/trainstation_ornament002.mdl",Group=3,Name="I dont know",rdescription="You think this is a tesla tower?"})
-GM:AddProp({Model="models/props_phx/construct/wood/wood_panel1x1.mdl",Group=3,Name="Wooden panel."})
+GM:AddProp({Model="models/Items/item_item_crate.mdl",Group=3,Name="BOX",Health=25})
+GM:AddProp({Model="models/props_junk/watermelon01.mdl",Group=3,Name="MELON",Health=50})
+GM:AddProp({Model="models/props_trainstation/trainstation_ornament002.mdl",Health=80,Group=3,Name="I dont know",rdescription="You think this is a tesla tower?"})
+GM:AddProp({Model="models/props_phx/construct/wood/wood_panel1x1.mdl",Group=3,Name="Wooden panel.",Health=35})

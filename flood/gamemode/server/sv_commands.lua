@@ -4,7 +4,8 @@ local function Flood_GiveCash(ply, txt)
 	if command[1] == "!givecash" then
 		local ct = ChatText()
 		local ct2 = ChatText()
-		if ply:IsAdmin() then
+		--if ply:IsAdmin() then
+		if true then
 			local target_player = FindPlayer(ply, command[2])
 			local target_amount = command[3]
 			local commandname = command[1]

@@ -59,6 +59,39 @@ local function Flood_CheckCash(ply, txt)
 end
 hook.Add("PlayerSay", "Flood_CheckCash", Flood_CheckCash)
 
+-- Pay cash
+local function Flood_PayCash(ply,txt)
+	local c = string.Explode(" ",txt)
+	if(c[1]=="!pay")then
+		local p = FindPlayer(ply,c[2])
+		if(IsValid(p)then
+			if(not tonumber(c[3]))then 
+				ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+				ct:AddText("No number?")
+				ct:Send(ply)
+			end
+			if(ply:CanAfford(tonumber(c[3])))then
+				ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+				ct:AddText("You gave "..p:Nick().." "..tonumber(c[3]).."$!")
+				ct:Send(ply)
+				ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+				ct:AddText(ply:Nick.." gave "..'you'.." "..tonumber(c[3]).."$!")
+				ct:Send(p)
+				ply:SubCash(tonumber(c[3]))
+				p:AddCash(tonumber(c[3]))
+			else
+				ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+				ct:AddText("You cant afford!")
+				ct:Send(ply)
+			end
+		else
+			ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+			ct:AddText("Target player could not be found.")
+			ct:Send(ply)
+		end
+	end
+end
+hook.Add("PlayerSay","Flood_PayCash")
 -- Set Cash
 local function Flood_SetCash(ply, txt)
 	local command = string.Explode(" ", txt)
@@ -195,7 +228,7 @@ hook.Add("PlayerSay", "Flood_SetTime", Flood_SetTime)
 -- Returns string
 function FindPlayer(ply, target)
 	name = string.lower(target)
-	for _,v in ipairs(player.GetHumans()) do
+	for _,v in ipairs(player.GetAll()) do
 		if(string.find(string.lower(v:Name()), name, 1, true) != nil) then 
 			return v
 		end

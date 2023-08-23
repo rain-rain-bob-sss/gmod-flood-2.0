@@ -5,18 +5,18 @@ GM.RenderTools = GAMEMODE and GM.RenderTools or {}
 
 -- Tables are {"internal toolname", DonatorOnly bool, Enabled? bool},
 GM.ConstraintTools = {
-	{"axis", false, true}, 		{"ballsocket", false, true},
-	{"elastic", false, true}, 	{"hydraulic", false, true},
-	{"motor", false, true}, 	{"muscle", false, true}, 
-	{"pulley", false, true}, 	{"rope", false, true}, 
-	{"slider", false, true}, 	{"weld", false, true},
-	{"winch", false, true}
+	{"axis", false,true,true}, 		{"ballsocket", false,true,true},
+	{"elastic", false,true,true}, 	{"hydraulic", false,true,true},
+	{"motor", false, true}, 	{"muscle", false, false,true}, 
+	{"pulley", false,true,true}, 	{"rope", false, true}, 
+	{"slider", false,true,true}, 	{"weld", false, true},
+	{"winch", false,true,true}
 }
 
 GM.ConstructionTools = {
-	{"balloon", false, true},	{"button", false, true},
-	{"duplicator", false, true},{"dynamite", false, true},
-	{"emitter", false, true}, 	{"hoverball", false, true},
+	{"balloon", false,true,true},	{"button", false, true},
+	{"duplicator", false,true,true},{"dynamite", false,true,true},
+	{"emitter", false, true}, 	{"hoverball", false,true,true},
 	{"lamp", false, true}, 		{"light", false, true},
 	{"nocollide", false, true},	{"physprop", false, true},
 	{"remover", false, true}, 	{"thruster", false, true},

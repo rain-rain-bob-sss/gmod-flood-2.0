@@ -231,7 +231,8 @@ function GM:EntityTakeDamage(ent, dmginfo)
 	end
 end
 candmgply={
-	['weapon_stunstick']=true
+	['weapon_stunstick']=true,
+	['weapon_fists']=true
 }
 function ShouldTakeDamage(victim, attacker)
 	if GAMEMODE:GetGameState() ~= 3 then

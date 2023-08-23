@@ -1,4 +1,5 @@
 PropCategories = {}
+Pcp={}
 Props = {}
 WeaponCategories = {}
 Weapons = {}
@@ -7,12 +8,20 @@ Weapons = {}
 PropCategories[1] = "Bouyant Props"
 PropCategories[2] = "Armor Props"
 PropCategories[3] = "Free Props"
-
+-- Prop catergories price
+Pcp[3]=0
 -- Weapon categories
 WeaponCategories[1] = "Basic Weapons"
 WeaponCategories[2] = "Xdefm fishing mod"
 WeaponCategories[3] = "Dev only"
 function GM:AddProp(tbl)
+    if(tbl.Price==nil)then
+        if(Pcp[tbl.Group])then
+            tbl.Price=Pcp[tbl.Group]
+        else
+            tbl.Price=100
+        end
+    end
     if(tbl.Name)then
         tbl.Description=tbl.Name
     end

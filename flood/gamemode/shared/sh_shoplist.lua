@@ -13,6 +13,9 @@ WeaponCategories[1] = "Basic Weapons"
 WeaponCategories[2] = "Xdefm fishing mod"
 WeaponCategories[3] = "Dev only"
 function GM:AddProp(tbl)
+    if(tbl.Name)then
+        tbl.Description=tbl.Name
+    end
     Props[#Props+1]=tbl
 end
 function GM:AddWeapon(tbl)
@@ -66,3 +69,8 @@ if(istable(weapons.Get('weapon_xdefm_rod')))then
   Weapons[#Weapons+1]={description="THE INVENTORY",Model="models/weapons/w_package.mdl",Group=2,Class="weapon_xdefm_inventory",Name="Fishing Inventory",Price=-5,Ammo=0,AmmoClass="",Damage=0}
   Weapons[#Weapons+1]={description="LETS GO TRADE!",Model="models/weapons/w_suitcase_passenger.mdl",Group=2,Class="weapon_xdefm_trade",Name="Fishing Trace",Price=-10,Ammo=0,AmmoClass="",Damage=0}
 end
+GM:AddProp({Model="models/props_c17/FurnitureDrawer001a.mdl",Group=3,Name="Furniture Drawer",Health=40})
+GM:AddProp({Model="models/Items/item_item_crate.mdl",Group=3,Name="BOX"})
+GM:AddProp({Model="models/props_junk/watermelon01.mdl",Group=3,Name="MELON"})
+GM:AddProp({Model="models/props_trainstation/trainstation_ornament002.mdl",Group=3,Name="I dont know",rdescription="You think this is a tesla tower?"})
+GM:AddProp({Model="models/props_phx/construct/wood/wood_panel1x1.mdl",Group=3,Name="Wooden panel."})

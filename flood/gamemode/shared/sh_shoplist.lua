@@ -73,13 +73,13 @@ Weapons[10] = {Model = "models/weapons/w_irifle.mdl", Group = 1, Class = "weapon
 Weapons[11] = {Model = "models/weapons/w_Physics.mdl",Group=1,Class='weapon_physcannon',Name="Pusher",Price=1500,Ammo=0,AmmoClass="",Damage=-0.1}
 Weapons[12] = {Model = "models/weapons/w_stunbaton.mdl",Group=3,Class='weapon_stunstick',Name="Super stick",Price=0,Ammo=0,AmmoClass="",DevOnly=true}
 Weapons[13] = {Model = "models/Gibs/HGIBS.mdl",Group=1,Class="weapon_fists",Name='Fist',Price=0,Ammo=0,AmmoClass="",Damage=6}
-if(istable(weapons.Get('weapon_xdefm_rod')))then
+--if(istable(weapons.Get('weapon_xdefm_rod')))then
   Weapons[#Weapons+1]={description="Model from oc_diving_v9 huh?",Model="models/oc_diving/rod.mdl",Group=2,Class="weapon_xdefm_rod",Name="Fishing rod",Price=-1,Ammo=0,AmmoClass="",Damage=0}
   Weapons[#Weapons+1]={description="THE INVENTORY",Model="models/weapons/w_package.mdl",Group=2,Class="weapon_xdefm_inventory",Name="Fishing Inventory",Price=-5,Ammo=0,AmmoClass="",Damage=0}
   Weapons[#Weapons+1]={description="LETS GO TRADE!",Model="models/weapons/w_suitcase_passenger.mdl",Group=2,Class="weapon_xdefm_trade",Name="Fishing Trace",Price=-10,Ammo=0,AmmoClass="",Damage=0}
-end
-GM:AddProp({Model="models/props_c17/FurnitureDrawer001a.mdl",Group=3,Name="Furniture Drawer",Health=40})
-GM:AddProp({Model="models/Items/item_item_crate.mdl",Group=3,Name="BOX",Health=25})
-GM:AddProp({Model="models/props_junk/watermelon01.mdl",Group=3,Name="MELON",Health=50})
-GM:AddProp({Model="models/props_trainstation/trainstation_ornament002.mdl",Health=80,Group=3,Name="I dont know",rdescription="You think this is a tesla tower?"})
-GM:AddProp({Model="models/props_phx/construct/wood/wood_panel1x1.mdl",Group=3,Name="Wooden panel.",Health=35})
+--end
+GM:AddProp({Model="models/props_c17/FurnitureDrawer001a.mdl",Group=3,Description="Furniture Drawer",Health=40,Price=0})
+GM:AddProp({Model="models/Items/item_item_crate.mdl",Group=3,Description="BOX",Health=25,Price=0})
+GM:AddProp({Model="models/props_junk/watermelon01.mdl",Group=3,Description="MELON",Health=50,Price=0})
+GM:AddProp({Model="models/props_trainstation/trainstation_ornament002.mdl",Health=80,Group=3,Description="I dont know",Price=0,rdescription="You think this is a tesla tower?"})
+GM:AddProp({Model="models/props_phx/construct/wood/wood_panel1x1.mdl",Group=3,Description="Wooden panel.",Price=0,Health=35})

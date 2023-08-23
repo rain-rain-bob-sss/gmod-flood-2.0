@@ -12,7 +12,12 @@ PropCategories[3] = "Free Props"
 WeaponCategories[1] = "Basic Weapons"
 WeaponCategories[2] = "Xdefm fishing mod"
 WeaponCategories[3] = "Dev only"
-
+function GM:AddProp(tbl)
+    Props[#Props+1]=tbl
+end
+function GM:AddWeapon(tbl)
+    Weapons[#Weapons+1]=tbl
+end
 -- Props
 Props[1] = {Model = "models/props_c17/FurnitureTable002a.mdl", Group = 1, Price = 50, Health = 25, DonatorOnly = false, Description = "Wooden Table"}
 Props[2] = {Model = "models/props_c17/gravestone003a.mdl", Group = 2, Price = 160, Health = 80, DonatorOnly = false, Description = "Gravestone"}
@@ -54,7 +59,7 @@ Weapons[8] = {Model = "models/weapons/w_slam.mdl", Group = 1, Class = "weapon_sl
 Weapons[9] = {Model = "models/weapons/w_smg1.mdl", Group = 1, Class = "weapon_smg1", Name = "SMG", Price = 2500, Ammo = 500, AmmoClass = "SMG1", Damage = 5, DonatorOnly = false}
 Weapons[10] = {Model = "models/weapons/w_irifle.mdl", Group = 1, Class = "weapon_ar2", Name = "AR2", Price = 7500, Ammo = 1000, AmmoClass = "AR2", Damage = 8, DonatorOnly = false}
 Weapons[11] = {Model = "models/weapons/w_Physics.mdl",Group=1,Class='weapon_physcannon',Name="Pusher",Price=1500,Ammo=0,AmmoClass="",Damage=-0.1}
-Weapons[12] = {Model = "models/weapons/w_stunbaton.mdl",Group=1,Class='weapon_stunstick',Name="Super stick",Price=0,Ammo=0,AmmoClass="",DevOnly=true}
+Weapons[12] = {Model = "models/weapons/w_stunbaton.mdl",Group=3,Class='weapon_stunstick',Name="Super stick",Price=0,Ammo=0,AmmoClass="",DevOnly=true}
 Weapons[13] = {Model = "models/Gibs/HGIBS.mdl",Group=1,Class="weapon_fists",Name='Fist',Price=0,Ammo=0,AmmoClass="",Damage=6}
 if(istable(weapons.Get('weapon_xdefm_rod')))then
   Weapons[#Weapons+1]={description="Model from oc_diving_v9 huh?",Model="models/oc_diving/rod.mdl",Group=2,Class="weapon_xdefm_rod",Name="Fishing rod",Price=-1,Ammo=0,AmmoClass="",Damage=0}

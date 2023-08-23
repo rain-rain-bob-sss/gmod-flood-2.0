@@ -175,7 +175,7 @@ function GM:EntityTakeDamage(ent, dmginfo)
 				local wep = dmginfo:GetAttacker():GetActiveWeapon():IsValid() and dmginfo:GetAttacker():GetActiveWeapon() or dmginfo:GetInflictor()
 				--print(wep:GetClass())
 				--if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then 
-				if(NADMOD.IsFriendProp(ent,attacker))then 
+				if(NADMOD.IsFriendProp(ent,attacker) or attacker=ent:CPPIGetOwner())then 
 					if((wepsdamagealt[wep:GetClass()] or wepdmglist[wep:GetClass()] or 1) < 0)then --heal weapon?
 						--do something?
 					else
@@ -188,7 +188,7 @@ function GM:EntityTakeDamage(ent, dmginfo)
 					local mul = GetConVar("flood_damage_cashmul"):GetFloat()
 					local damage = 0
 					if wep:GetClass() == "weapon_pistol" then
-						damage=4
+						damage=2.5
 						if(GAMEMODE:GetGameState()==4)then
 							damage=damage*100
 						end
@@ -220,7 +220,9 @@ function GM:EntityTakeDamage(ent, dmginfo)
 					ent:EmitSound('physics/concrete/concrete_break2.wav',75,math.random(100,125+i*5),1,CHAN_STATIC,0,0)
 				end
 				if(GAMEMODE:GetGameState()==4)then
-					attacker:AddCash(15)
+					if(attacker:IsPlayer())then
+						attacker:AddCash(15)
+					end
 				else
 					attacker.Destroyedpropscount=attacker.Destroyedpropscount+1
 				end

@@ -88,12 +88,12 @@ function GM:DeclareWinner(case, ply)
 	elseif case == 2 then
 		local ct = ChatText()
 		ct:AddText("[Flood] ", Color(132, 199, 29, 255))
-		ct:AddText("Nobody won!")
+		ct:AddText("Nobody won! is this pro gamer perish together or just noob fight?!")
 		ct:SendAll()
 	elseif case == 3 then
 		local ct = ChatText()
 		ct:AddText("[Flood] ", Color(132, 199, 29, 255))
-		ct:AddText("Round time limit reached. Nobody wins.")
+		ct:AddText("Round time limit reached. Nobody wins...")
 		ct:SendAll()
 	end
 end
@@ -116,8 +116,8 @@ function GM:RefundAllProps()
 			if v:CPPIGetOwner() ~= nil and v:CPPIGetOwner() ~= NULL and v:CPPIGetOwner() ~= "" then
 				local Currenthealth = tonumber(v:GetNWInt("CurrentPropHealth"))
 				local Basehealth = tonumber(v:GetNWInt("BasePropHealth"))
-				local Currentcash = tonumber(v:CPPIGetOwner():GetNWInt("flood_cash"))
-				local Recieve = (Currenthealth / Basehealth) * Basehealth
+				local PropPrice = tonumber(v:GetNwInt('FM_Price'))
+				local Recieve = (Currenthealth / Basehealth) * PropPrice
 				if Recieve > 0 then
 					v:Remove()
 					if v:CPPIGetOwner():IsValid() then 

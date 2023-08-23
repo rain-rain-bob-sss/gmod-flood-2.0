@@ -4,8 +4,7 @@ local function Flood_GiveCash(ply, txt)
 	if command[1] == "!givecash" then
 		local ct = ChatText()
 		local ct2 = ChatText()
-		--if ply:IsAdmin() then
-		if true then
+		if ply:IsAdmin() then
 			local target_player = FindPlayer(ply, command[2])
 			local target_amount = command[3]
 			local commandname = command[1]
@@ -40,7 +39,7 @@ local function Flood_CheckCash(ply, txt)
 	local command = string.Explode(" ", txt)
 	if command[1] == "!checkcash" then
 		local ct = ChatText()
-		if ply:IsAdmin() then
+		if true then
 			local target_player = FindPlayer(ply, command[2])
 			if IsValid(target_player) then	
 				ct:AddText("[Flood] ", Color(132, 199, 29, 255))					

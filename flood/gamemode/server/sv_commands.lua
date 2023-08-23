@@ -64,7 +64,7 @@ local function Flood_PayCash(ply,txt)
 	local c = string.Explode(" ",txt)
 	if(c[1]=="!pay")then
 		local p = FindPlayer(ply,c[2])
-		if(IsValid(p)then
+		if(IsValid(p))then
 			if(not tonumber(c[3]))then 
 				ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 				ct:AddText("No number?")

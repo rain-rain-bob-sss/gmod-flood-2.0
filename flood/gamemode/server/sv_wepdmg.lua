@@ -8,9 +8,9 @@ concommand.Add('flood_wepdmgtoplychange',function(p,c,a,as)
           local result=tonumber[a[2]] or wepdmgtoply[a[1]] or 0
           wepdmgtoply[a[1]]=result
           if(result==0)then
-              RunConsoleCommand('flood_candmg',"0")
+              RunConsoleCommand('flood_candmg',[a[1],"0")
           else
-              RunConsoleCommand('flood_candmg',"1")
+              RunConsoleCommand('flood_candmg',[a[1],"1")
           end
       end
 end)

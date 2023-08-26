@@ -16,4 +16,4 @@ function GM:WaterHurts()
 		end
 	end
 end
-hook.Add("Tick", "flood waterhurt function", function() hook.Call("WaterHurts", GAMEMODE) end)
+hook.Add("Tick", "flood waterhurt function",GM.WaterHurts)

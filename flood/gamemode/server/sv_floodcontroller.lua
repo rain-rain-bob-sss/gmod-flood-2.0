@@ -11,8 +11,8 @@ end
 
 function GM:CheckForWaterControllers()
 	if #GetWaterControllers() <= 0 then 
-		self.ShouldHaltGamemode = true
-		error("Flood was unable to find a valid water controller on "..game.GetMap()..", gamemode halting.", 2)
+		--self.ShouldHaltGamemode = true
+		print("Flood was unable to find a valid water controller on "..game.GetMap()..",but you still can try to play if map has water.", 2)
 	end
 end
 

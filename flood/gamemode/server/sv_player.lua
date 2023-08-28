@@ -307,7 +307,7 @@ function GM:PurchaseProp(ply, cmd, args)
 					local ea=ply:EyeAngles()
 					ea[1]=0
 					ea[3]=0
-					ent:SetAngles(ea)
+					ent:SetAngles(-ea)
 					ent:SetPos(tr.HitPos + Vector(0, 0, (ent:OBBCenter():Distance(ent:OBBMins()) + 5)))
 					ent:CPPISetOwner(ply)
 					ent:Spawn()
@@ -316,6 +316,26 @@ function GM:PurchaseProp(ply, cmd, args)
 					ent:SetNWInt("CurrentPropHealth", math.floor(Prop.Health))
 					ent:SetNWInt("BasePropHealth", math.floor(Prop.Health))
 					ent:SetNWInt("FM_Price", math.floor(Prop.Price))
+					ent.IsFloodProp=true
+					pcall(function()
+						local b=Prop.Buoyancy
+						if(b)then
+							ent:GetPhysicsObject():SetBuoyancyRatio(b/100)
+						end
+						local m=Prop.Mass
+						if(m)then
+							ent:GetPhysicsObject():SetMass(m)
+						end
+						local pm=Prop.PhysMaterial
+						if(pm)then
+							ent:GetPhysicsObject():SetMaterial(pm)
+						end
+						local gl=Prop.GameFlags
+						if(gl)then
+							ent:GetPhysicsObject():AddGameFlag(gl)
+						end
+						ent:GetPhysicsObject():Sleep()
+					end)
 					local undofunc=function(t,ent,money)
 						if(ent:IsValid() and (not ent.flood_trashed))then
 							ply:AddCash(money)

@@ -67,7 +67,10 @@ function PANEL:AddCategory(Name, Label, tItems)
 			local item = Category:Add(tool.Text)
 			item.DoClick = function(button)
 				self:CreateCP(button)
-				LocalPlayer():ConCommand(tool.Command)
+				--E
+				timer.Simple(1/33,function()
+					LocalPlayer():ConCommand(tool.Command)
+				end)
 			end
 
 			item.ControlPanelBuildFunction = tool.CPanelFunction

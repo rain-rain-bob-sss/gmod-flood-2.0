@@ -30,6 +30,9 @@ flood_wh_tick - Water Hurt delay
 Flood 2.0 Workshop: http://steamcommunity.com/sharedfiles/filedetails/?id=474900236  
 Flood 2.2 Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3016332015    
 
+READ ME FFS:  
+EDIT server/sv_entitieshealth.lua if you want  
+EDIT init.lua if you want (line 142:wepsdamagealt is weapon damage alt table,entitesdmg.. yeah you know what does this does,line 235 is can damage player table,edit this to make some weapon able to damage player!)  
 
 Projects to use flood 2.0:
   https://github.com/WTC-GhostCommunity/The-Purge-Gamemode

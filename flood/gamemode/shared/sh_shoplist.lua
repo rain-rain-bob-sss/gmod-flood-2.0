@@ -61,6 +61,7 @@ Props[27] = {Model = "models/props_building_details/Storefront_Template001a_Bars
 Props[28] = {Model = "models/props_borealis/bluebarrel001.mdl", Group = 1, Price = 50, Health = 120, DonatorOnly = false, Description = "Blue barrel"}
 Props[29] = {Model = "models/props_wasteland/cafeteria_table001a.mdl",Group=1,Price=120,Health=150,Description="Cafeteria Table",rdescription="Just a Cafeteria tbl.",}
 -- Weapons
+-- OMFG,STOP ADDING SOME DONATOR ONLY WEAPON,IF YOU WANT JUST MAKE IT BALANCE DAMN.
 Weapons[1] = {Model = "models/weapons/w_crossbow.mdl", Group = 1, Class = "weapon_crossbow", Name = "Crossbow", Price = 15000, Ammo = 1000, AmmoClass = "XBowBolt", Damage = 50, DonatorOnly = false}
 Weapons[2] = {Model = "models/weapons/w_rocket_launcher.mdl", Group = 1, Class = "weapon_rpg", Name = "RPG", Price = 37500, Ammo = 3, AmmoClass = "RPG_Round", Damage = 20, DonatorOnly = false}
 Weapons[3] = {Model = "models/weapons/W_357.mdl", Group = 1, Class = "weapon_357", Name = "357 Magnum", Price = 10000, Ammo = 1000, AmmoClass = "357", Damage = 12.5, DonatorOnly = false}
@@ -73,11 +74,11 @@ Weapons[10] = {Model = "models/weapons/w_irifle.mdl", Group = 1, Class = "weapon
 Weapons[11] = {Model = "models/weapons/w_Physics.mdl",Group=1,Class='weapon_physcannon',Name="Pusher",Price=1500,Ammo=0,AmmoClass="",Damage=-0.1}
 Weapons[12] = {Model = "models/weapons/w_stunbaton.mdl",Group=3,Class='weapon_stunstick',Name="Super stick",Price=0,Ammo=0,AmmoClass="",DevOnly=true}
 Weapons[13] = {Model = "models/Gibs/HGIBS.mdl",Group=1,Class="weapon_fists",Name='Fist',Price=0,Ammo=0,AmmoClass="",Damage=6}
---if(istable(weapons.Get('weapon_xdefm_rod')))then
+if(istable(weapons.Get('weapon_xdefm_rod')))then
   Weapons[#Weapons+1]={description="Model from oc_diving_v9 huh?",Model="models/oc_diving/rod.mdl",Group=2,Class="weapon_xdefm_rod",Name="Fishing rod",Price=-1,Ammo=0,AmmoClass="",Damage=0}
   Weapons[#Weapons+1]={description="THE INVENTORY",Model="models/weapons/w_package.mdl",Group=2,Class="weapon_xdefm_inventory",Name="Fishing Inventory",Price=-5,Ammo=0,AmmoClass="",Damage=0}
   Weapons[#Weapons+1]={description="LETS GO TRADE!",Model="models/weapons/w_suitcase_passenger.mdl",Group=2,Class="weapon_xdefm_trade",Name="Fishing Trace",Price=-10,Ammo=0,AmmoClass="",Damage=0}
---end
+end
 GM:AddProp({Model="models/props_c17/FurnitureDrawer001a.mdl",Group=3,Description="Furniture Drawer",Health=40,Price=0})
 GM:AddProp({Model="models/Items/item_item_crate.mdl",Group=3,Description="BOX",Health=25,Price=0})
 GM:AddProp({Model="models/props_junk/watermelon01.mdl",Group=3,Description="MELON",Health=50,Price=0})

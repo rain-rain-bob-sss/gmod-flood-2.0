@@ -204,7 +204,12 @@ function TOOL:LeftClick(tr)
 		end
 
 		if self:GetOwner():KeyDown(IN_USE) then
-			return self:AutoSelect(tr.Entity)
+			if(self:GetOwner():IsAdmin())then
+				return self:AutoSelect(tr.Entity)
+			else
+				self:GetOwner():PrintMessage(4,"Opps! you cannot auto select,sorry!")
+				return
+			end
 		end
 
 		return self:HandleProp(tr)
@@ -340,6 +345,10 @@ function TOOL:PerformWeld(tr)
 	local ply = self:GetOwner()
 
 	if #self.SelectedProps < 2 then
+		return
+	end
+	if #self.SelectedProps > 35 then
+		self:GetOwner():PrintMessage(4,"Too many props! what the hell??")
 		return
 	end
 

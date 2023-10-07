@@ -11,6 +11,9 @@ Flood 2.2 Credits:
 Installation:  
 1) Drop the flood folder into your gamemode folder. Simple as that.
 
+CHAT COMMAND
+SEE FLOOD 2.0 WORKSHOP
+(NEW:!pay <playername> <Cash>)
 
 Convars:  
 flood_build_time - Time allowed for building (def: 240)  

@@ -163,7 +163,7 @@ function SWEP:UpdateAttack()
 					--	vVel:Sub(Vector(0,0,zVel/100))
 					--end
 					pcall(function()
-						self.Owner:GetGroundEntity():GetPhysicsObject():SetVelocity(vVel)
+						self.Owner:GetGroundEntity():GetPhysicsObject():SetVelocity(vVel*5)
 					end)
 				end
 			end

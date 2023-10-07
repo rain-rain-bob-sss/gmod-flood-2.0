@@ -63,6 +63,7 @@ hook.Add("PlayerSay", "Flood_CheckCash", Flood_CheckCash)
 local function Flood_PayCash(ply,txt)
 	local c = string.Explode(" ",txt)
 	if(c[1]=="!pay")then
+		local ct = ChatText()
 		local p = FindPlayer(ply,c[2])
 		if(IsValid(p))then
 			if(not tonumber(c[3]))then 

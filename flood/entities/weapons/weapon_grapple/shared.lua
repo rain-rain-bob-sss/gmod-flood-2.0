@@ -130,7 +130,7 @@ function SWEP:UpdateAttack()
 
 	lastpos = endpos
 	
-	
+
 			if ( self.Tr.Entity:IsValid() ) then
 			
 					endpos = self.Tr.Entity:GetPos()
@@ -163,7 +163,20 @@ function SWEP:UpdateAttack()
 					--	vVel:Sub(Vector(0,0,zVel/100))
 					--end
 					pcall(function()
-						self.Owner:GetGroundEntity():GetPhysicsObject():SetVelocity(vVel*5)
+						local ent=self.Owner:GetGroundEntity()
+						if(ent:IsWorld())then return end
+						local pos=ent:WorldToLocal(self.Owner:GetPos())
+						self.Owner:GetGroundEntity():GetPhysicsObject():SetVelocity(vVel*self.Owner:GetGroundEntity():GetPhysicsObject():GetMass()*0.05)
+						timer.Simple(0.01,function()
+							pcall(function()
+								local ply=self.Owner
+								local tr = util.TraceHull({start=ent:LocalToWorld(pos),endpos=ent:LocalToWorld(pos),mins=ply:OBBMins(),maxs=ply:OBBMaxs(),
+                    filter={ply},mask=MASK_PLAYERSOLID,collisiongroup=COLLISION_GROUP_DOOR_BLOCKER})
+								if(tr.Hit)then return end
+								if(not ent:IsValid())then return end
+								self.Owner:SetPos(ent:LocalToWorld(pos))
+							end)
+						end)
 					end)
 				end
 			end

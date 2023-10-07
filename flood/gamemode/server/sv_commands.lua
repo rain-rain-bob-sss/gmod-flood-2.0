@@ -72,10 +72,10 @@ local function Flood_PayCash(ply,txt)
 				ct:Send(ply)
 			end
 			if(ply:CanAfford(tonumber(c[3])))then
-				ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+				ct:AddText("[Flood] ", Color(132, 199, 29, 255))
 				ct:AddText("You gave "..p:Nick().." "..tonumber(c[3]).."$!")
 				ct:Send(ply)
-				ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+				ct:AddText("[Flood] ", Color(132, 199, 29, 255))
 				ct:AddText(ply:Nick().." gave "..'you'.." "..tonumber(c[3]).."$!")
 				ct:Send(p)
 				ply:SubCash(tonumber(c[3]))

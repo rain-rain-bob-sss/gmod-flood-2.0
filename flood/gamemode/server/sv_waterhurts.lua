@@ -2,7 +2,7 @@ local whTick = 0
 function GM:WaterHurts()
 	if GetConVar("flood_wh_enabled"):GetBool() then
 		if whTick < CurTime() then
-			for _, v in pairs(self:GetActivePlayers()) do
+			for _, v in pairs(GAMEMODE:GetActivePlayers()) do
 				if v:WaterLevel() >= 1 then
 					local dmginfo = DamageInfo()
 				    dmginfo:SetDamageType(16384)

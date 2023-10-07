@@ -91,7 +91,7 @@ local function Flood_PayCash(ply,txt)
 		end
 	end
 end
-hook.Add("PlayerSay","Flood_PayCash")
+hook.Add("PlayerSay","Flood_PayCash",Flood_PayCash)
 -- Set Cash
 local function Flood_SetCash(ply, txt)
 	local command = string.Explode(" ", txt)

@@ -60,35 +60,35 @@ if CLIENT then
 		{name = "rightuse", stage = 2},
 		{name = "reload", stage = 2},
 	}
-
-	language.Add("tool.smartweld.name", "Weld - Smart")
-	language.Add("tool.smartweld.desc", "Automatically welds selected props")
-
-	language.Add("tool.smartweld.left", "Select or deselect a prop")
-	language.Add("tool.smartweld.leftuse", "Auto-Selects the props in a set radius")
-	language.Add("tool.smartweld.right", "Welds the selected props")
-	language.Add("tool.smartweld.rightuse", "Welds all the props to the one you\'re looking at")
-	language.Add("tool.smartweld.reload", "Clears the current selection")
 	
-	language.Add("tool.smartweld.selectoutsideradius", "Auto-Select Radius:")
-	language.Add("tool.smartweld.selectoutsideradius.help", "The auto-select radius, anything beyond this value wont be selected.")
-	language.Add("tool.smartweld.maxweldsperprop", "Max welds per prop")
-	language.Add("tool.smartweld.maxweldsperprop.help", "The maximum welds per prop. This only works if you are welding more than 127 props at once. Higher than 10 not recommended, 15 maximum.")
-	language.Add("tool.smartweld.strength", "Force Limit:")
-	language.Add("tool.smartweld.strength.help", "The strength of the welds created. Use 0 for unbreakable welds.")
-	language.Add("tool.smartweld.world", "Weld everything to world")
-	language.Add("tool.smartweld.world.help", "Turning this on will weld everything to the world. Useful for making something totally immovable.")
-	language.Add("tool.smartweld.nocollide", "No-collide")
-	language.Add("tool.smartweld.nocollide.help", "Whether all props should no-collide each other when welded.")
-	language.Add("tool.smartweld.freeze", "Auto-freeze")
-	language.Add("tool.smartweld.freeze.help", "Whether all selected props should be frozen after the weld.")
-	language.Add("tool.smartweld.clearwelds", "Remove old welds")
-	language.Add("tool.smartweld.clearwelds.help", "If a selected prop has any welds already on it this will remove them first.")
-	language.Add("tool.smartweld.color", "Selection color")
-	language.Add("tool.smartweld.color.help", "Modify the selection color, it\'s useful for grouping.")
-	language.Add("Undone_smartweld", "Undone Smart-Weld")
-	language.Add("Cleanup_smartweld", "Smart Welds")
-	language.Add("Cleaned_smartweld", "Smart-Welds Cleared")
+	language.Add("tool.fm_nicesmartweld.name", "Weld - Smart")
+	language.Add("tool.fm_nicesmartweld.desc", "Automatically welds selected props")
+
+	language.Add("tool.fm_nicesmartweld.left", "Select or deselect a prop")
+	language.Add("tool.fm_nicesmartweld.leftuse", "Auto-Selects the props in a set radius")
+	language.Add("tool.fm_nicesmartweld.right", "Welds the selected props")
+	language.Add("tool.fm_nicesmartweld.rightuse", "Welds all the props to the one you\'re looking at")
+	language.Add("tool.fm_nicesmartweld.reload", "Clears the current selection")
+	
+	language.Add("tool.fm_nicesmartweld.selectoutsideradius", "Auto-Select Radius:")
+	language.Add("tool.fm_nicesmartweld.selectoutsideradius.help", "The auto-select radius, anything beyond this value wont be selected.")
+	language.Add("tool.fm_nicesmartweld.maxweldsperprop", "Max welds per prop")
+	language.Add("tool.fm_nicesmartweld.maxweldsperprop.help", "The maximum welds per prop. This only works if you are welding more than 127 props at once. Higher than 10 not recommended, 15 maximum.")
+	language.Add("tool.fm_nicesmartweld.strength", "Force Limit:")
+	language.Add("tool.fm_nicesmartweld.strength.help", "The strength of the welds created. Use 0 for unbreakable welds.")
+	language.Add("tool.fm_nicesmartweld.world", "Weld everything to world")
+	language.Add("tool.fm_nicesmartweld.world.help", "Turning this on will weld everything to the world. Useful for making something totally immovable.")
+	language.Add("tool.fm_nicesmartweld.nocollide", "No-collide")
+	language.Add("tool.fm_nicesmartweld.nocollide.help", "Whether all props should no-collide each other when welded.")
+	language.Add("tool.fm_nicesmartweld.freeze", "Auto-freeze")
+	language.Add("tool.fm_nicesmartweld.freeze.help", "Whether all selected props should be frozen after the weld.")
+	language.Add("tool.fm_nicesmartweld.clearwelds", "Remove old welds")
+	language.Add("tool.fm_nicesmartweld.clearwelds.help", "If a selected prop has any welds already on it this will remove them first.")
+	language.Add("tool.fm_nicesmartweld.color", "Selection color")
+	language.Add("tool.fm_nicesmartweld.color.help", "Modify the selection color, it\'s useful for grouping.")
+	language.Add("Undone_fm_nicesmartweld", "Undone Smart-Weld")
+	language.Add("Cleanup_fm_nicesmartweld", "Smart Welds")
+	language.Add("Cleaned_fm_nicesmartweld", "Smart-Welds Cleared")
 end
 
 function TOOL.BuildCPanel(panel)
@@ -101,8 +101,8 @@ function TOOL.BuildCPanel(panel)
 
 	-- Outside Radius
 	panel:AddControl("Slider", {
-		Label = "#tool.smartweld.selectoutsideradius",
-		Help = "#tool.smartweld.selectoutsideradius",
+		Label = "#tool.fm_nicesmartweld.selectoutsideradius",
+		Help = "#tool.fm_nicesmartweld.selectoutsideradius",
 		Type = "float",
 		Min = "0",
 		Max = "1000",
@@ -111,8 +111,8 @@ function TOOL.BuildCPanel(panel)
 
 	-- Force Limit
 	panel:AddControl("Slider", {
-		Label = "#tool.smartweld.strength",
-		Help = "#tool.smartweld.strength",
+		Label = "#tool.fm_nicesmartweld.strength",
+		Help = "#tool.fm_nicesmartweld.strength",
 		Type = "float",
 		Min = "0",
 		Max = "10000",
@@ -121,8 +121,8 @@ function TOOL.BuildCPanel(panel)
 
 	-- Max Welds Per Prop
 	panel:AddControl("Slider", {
-		Label = "#tool.smartweld.maxweldsperprop",
-		Help = "#tool.smartweld.maxweldsperprop",
+		Label = "#tool.fm_nicesmartweld.maxweldsperprop",
+		Help = "#tool.fm_nicesmartweld.maxweldsperprop",
 		Type = "Integer",
 		Min = "1",
 		Max = "10",
@@ -131,36 +131,36 @@ function TOOL.BuildCPanel(panel)
 
 	-- Weld to each other or all to world
 	panel:AddControl("Checkbox", {
-		Label = "#tool.smartweld.world",
-		Help = "#tool.smartweld.world",
+		Label = "#tool.fm_nicesmartweld.world",
+		Help = "#tool.fm_nicesmartweld.world",
 		Command = "smartweld_world"
 	})
 
 	-- No-Collide Props While Welding
 	panel:AddControl("Checkbox", {
-		Label = "#tool.smartweld.nocollide",
-		Help = "#tool.smartweld.nocollide",
+		Label = "#tool.fm_nicesmartweld.nocollide",
+		Help = "#tool.fm_nicesmartweld.nocollide",
 		Command = "smartweld_nocollide"
 	})
 
 	-- Freeze Props When Welded
 	panel:AddControl("Checkbox", {
-		Label = "#tool.smartweld.freeze",
-		Help = "#tool.smartweld.freeze",
+		Label = "#tool.fm_nicesmartweld.freeze",
+		Help = "#tool.fm_nicesmartweld.freeze",
 		Command = "smartweld_freeze"
 	})
 
 	-- Clear Previous Welds Before Welding
 	panel:AddControl("Checkbox", {
-		Label = "#tool.smartweld.clearwelds",
-		Help = "#tool.smartweld.clearwelds",
+		Label = "#tool.fm_nicesmartweld.clearwelds",
+		Help = "#tool.fm_nicesmartweld.clearwelds",
 		Command = "smartweld_clearwelds"
 	})
 
 	-- Color
 	panel:AddControl("Color", {
-		Label = "#tool.smartweld.color",
-		Help = "#tool.smartweld.color",
+		Label = "#tool.fm_nicesmartweld.color",
+		Help = "#tool.fm_nicesmartweld.color",
 		Red = "smartweld_color_r",
 		Green = "smartweld_color_g",
 		Blue = "smartweld_color_b",

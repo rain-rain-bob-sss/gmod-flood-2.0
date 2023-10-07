@@ -71,7 +71,8 @@ Weapons[7] = {Model = "models/weapons/w_shotgun.mdl", Group = 1, Class = "weapon
 Weapons[8] = {Model = "models/weapons/w_slam.mdl", Group = 1, Class = "weapon_slam", Name = "SLAM", Price = 1250, Ammo = 8, AmmoClass = "slam", Damage = 15, DonatorOnly = false}
 Weapons[9] = {Model = "models/weapons/w_smg1.mdl", Group = 1, Class = "weapon_smg1", Name = "SMG", Price = 2500, Ammo = 500, AmmoClass = "SMG1", Damage = 5, DonatorOnly = false}
 Weapons[10] = {Model = "models/weapons/w_irifle.mdl", Group = 1, Class = "weapon_ar2", Name = "AR2", Price = 7500, Ammo = 1000, AmmoClass = "AR2", Damage = 8, DonatorOnly = false}
-Weapons[11] = {Model = "models/weapons/w_Physics.mdl",Group=1,Class='weapon_physcannon',Name="Pusher",Price=1500,Ammo=0,AmmoClass="",Damage=-0.1}
+Weapons[11] = {Model = "models/weapons/w_Physics.mdl",Group=1,Class='weapon_physcannon',Name="Pusher",Price=1500,Ammo=0,AmmoClass="",Damage=-10}
+Weapons[11] = {description="What? You think this is crossbow? pls look at other crossbow okay? \n This is grapple,Used to move you boat",Model = "models/weapons/w_crowbar.mdl",Group=1,Class='weapon_grapple',Name="NOT CROSSBOW,Grapple",Price=1500,Ammo=0,AmmoClass="",Damage=-10}
 Weapons[12] = {Model = "models/weapons/w_stunbaton.mdl",Group=3,Class='weapon_stunstick',Name="Super stick",Price=0,Ammo=0,AmmoClass="",DevOnly=true}
 Weapons[13] = {Model = "models/Gibs/HGIBS.mdl",Group=1,Class="weapon_fists",Name='Fist',Price=0,Ammo=0,AmmoClass="",Damage=6}
 if(istable(weapons.Get('weapon_xdefm_rod')))then

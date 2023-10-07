@@ -174,7 +174,11 @@ function SWEP:UpdateAttack()
                     filter={ply},mask=MASK_PLAYERSOLID,collisiongroup=COLLISION_GROUP_DOOR_BLOCKER})
 								if(tr.Hit)then return end
 								if(not ent:IsValid())then return end
-								self.Owner:SetPos(ent:LocalToWorld(pos))
+								if(not self.Owner:KeyDown(IN_JUMP))then
+									self.Owner:SetPos(ent:LocalToWorld(pos))
+									self.Owner:SetVelocity(-self.Owner:GetVelocity())
+									self.Owner:SetVelocity(ent:GetPhysicsObject():GetVelocity())
+								end
 							end)
 						end)
 					end)

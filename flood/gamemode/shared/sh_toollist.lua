@@ -10,7 +10,7 @@ GM.ConstraintTools = {
 	{"motor", false, true}, 	{"muscle", false, false,true}, 
 	{"pulley", false,true,true}, 	{"rope", false, true}, 
 	{"slider", false,true,true}, 	{"weld", false, true},
-	{"winch", false,true,true}
+	{"winch", false,true,true},{"fm_nicesmartweld",false,true}
 }
 
 GM.ConstructionTools = {

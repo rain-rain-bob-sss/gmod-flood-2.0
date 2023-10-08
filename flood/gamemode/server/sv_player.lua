@@ -307,7 +307,8 @@ function GM:PurchaseProp(ply, cmd, args)
 					local ea=ply:EyeAngles()
 					ea[1]=0
 					ea[3]=0
-					ent:SetAngles(-ea)
+					ent:SetAngles(ea)
+					ent:SetAngles((ent:GetForward()*-1):Angle())
 					ent:SetPos(tr.HitPos + Vector(0, 0, (ent:OBBCenter():Distance(ent:OBBMins()) + 5)))
 					ent:CPPISetOwner(ply)
 					ent:Spawn()

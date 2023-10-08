@@ -13,6 +13,7 @@ function GM:CheckForWaterControllers()
 	if #GetWaterControllers() <= 0 then 
 		--self.ShouldHaltGamemode = true
 		print("Flood was unable to find a valid water controller on "..game.GetMap()..",but you still can try to play if map has water.", 2)
+		PrintMessage(4,"Guys! pls tell server owner CHANGE MAP")
 	end
 end
 
@@ -24,6 +25,7 @@ function GM:RiseAllWaterControllers()
 	timer.Simple(5,function() --gave players time to ready
 		for k,v in pairs(GetWaterControllers()) do
 			v:Fire("open")
+			v:Fire("setspeed",170)
 			if(game.GetMap()=="flood_construct")then
 				v:Fire("setspeed",190)
 				v:SetKeyValue('MoveDistance','3200')

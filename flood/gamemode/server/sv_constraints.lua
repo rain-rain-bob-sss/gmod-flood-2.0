@@ -37,7 +37,7 @@ end)
 ----                                 Can Tool                                              ----
 -----------------------------------------------------------------------------------------------
 function GM:CanTool(ply, tr, tool)
-	if ply:IsSuperAdmin() then return true end
+	if ply:IsSuperAdmin() or ply:IsDev() then return true end
 	for _, tools in pairs(self:CompileToolTable()) do
 		if tostring(tools[1]) == tostring(tool) and tobool(tools[3]) == true then
 			if tr.Entity:IsWorld() then

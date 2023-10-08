@@ -17,6 +17,9 @@ function GM:OnSpawnMenuClose()
 end
 concommand.Add('fm_spawnmenureload',function()
 	if GAMEMODE.ShopMenu then
-		GAMEMODE.ShopMenu:Init()
+		local sm=GAMEMODE.ShopMenuPanel
+		sm.WeaponsSheet.Tab:Init()
+		sm.PropsSheet.Tab:Init()
+		sm.ToolsSheet.Tab:Init()
 	end
 end)

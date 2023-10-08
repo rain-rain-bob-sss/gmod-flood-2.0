@@ -26,7 +26,7 @@ function GM:PlayerInitialSpawn(ply)
 	end
 	ply.SpawnTime = CurTime()
 	
-	PrintMessage(HUD_PRINTCENTER, ply:Nick().." has spawned! Say hello to "..ply:Nick().."!")
+	PrintMessage(HUD_PRINTCENTER, ply:Nick().." has joined the server! say hello to "..ply:Nick().."!")
 end
 
 function GM:PlayerSpawn( ply )
@@ -245,24 +245,94 @@ hook.Add("ShutDown", "ServerShutDown", ServerDown)
 -----------------------------------------------------------------------------------------------
 ----                                 Prop/Weapon Purchasing                                ----
 -----------------------------------------------------------------------------------------------
+-- A little hacky function to help prevent spawning props partially inside walls
+-- Maybe it should use physics object bounds, not OBB, and use physics object bounds to initial position too
+local function fixupProp( ply, ent, hitpos, mins, maxs )
+	local entPos = ent:GetPos()
+	local endposD = ent:LocalToWorld( mins )
+	local tr_down = util.TraceLine( {
+		start = entPos,
+		endpos = endposD,
+		filter = { ent, ply }
+	} )
+
+	local endposU = ent:LocalToWorld( maxs )
+	local tr_up = util.TraceLine( {
+		start = entPos,
+		endpos = endposU,
+		filter = { ent, ply }
+	} )
+
+	-- Both traces hit meaning we are probably inside a wall on both sides, do nothing
+	if ( tr_up.Hit && tr_down.Hit ) then return end
+
+	if ( tr_down.Hit ) then ent:SetPos( entPos + ( tr_down.HitPos - endposD ) ) end
+	if ( tr_up.Hit ) then ent:SetPos( entPos + ( tr_up.HitPos - endposU ) ) end
+end
+
+local function TryFixPropPosition( ply, ent, hitpos )
+	fixupProp( ply, ent, hitpos, Vector( ent:OBBMins().x, 0, 0 ), Vector( ent:OBBMaxs().x, 0, 0 ) )
+	fixupProp( ply, ent, hitpos, Vector( 0, ent:OBBMins().y, 0 ), Vector( 0, ent:OBBMaxs().y, 0 ) )
+	fixupProp( ply, ent, hitpos, Vector( 0, 0, ent:OBBMins().z ), Vector( 0, 0, ent:OBBMaxs().z ) )
+end
+local function FixInvalidPhysicsObject( prop )
+
+	local PhysObj = prop:GetPhysicsObject()
+	if ( !IsValid( PhysObj ) ) then return end
+
+	local min, max = PhysObj:GetAABB()
+	if ( !min or !max ) then return end
+
+	local PhysSize = ( min - max ):Length()
+	if ( PhysSize > 5 ) then return end
+
+	local mins = prop:OBBMins()
+	local maxs = prop:OBBMaxs()
+	if ( !mins or !maxs ) then return end
+
+	local ModelSize = ( mins - maxs ):Length()
+	local Difference = math.abs( ModelSize - PhysSize )
+	if ( Difference < 10 ) then return end
+
+	-- This physics object is definitiely weird.
+	-- Make a new one.
+	prop:PhysicsInitBox( mins, maxs )
+	prop:SetCollisionGroup( COLLISION_GROUP_DEBRIS )
+
+	-- Check for success
+	PhysObj = prop:GetPhysicsObject()
+	if ( !IsValid( PhysObj ) ) then return end
+
+	PhysObj:SetMass( 100 )
+	PhysObj:Wake()
+
+end
+local basemessage=FM_MESSAGE_BASE()
+local msend=FM_MESSAGE
 function GM:PurchaseProp(ply, cmd, args)
 	if not ply.PropSpawnDelay then ply.PropSpawnDelay = 0 end
 	if not IsValid(ply) or not args[1] then return end
 	
 	local Prop = Props[math.floor(args[1])]
 	local tr = util.TraceLine(util.GetPlayerTrace(ply))
-	local ct = ChatText()
-
+	--local ct = ChatText()
+	local mt=table.Copy(basemessage)
 	if ply.Allow and Prop and self:GetGameState() <= 1 then
 		if Prop.DonatorOnly == true and not ply:IsDonator() and not ply:IsDev() then 
-			ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+			--[[ ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 			ct:AddText(Prop.Description.." is a donator only item!")
-			ct:Send(ply)
+			ct:Send(ply) ]]
+			mt.str=Prop.Description.." is a donator only item!"
+			mt.col=Color(158,49,49,255)
+			msend(ply,mt)
 			return 
 		elseif Prop.DevOnly==true and not ply:IsDev() then
-			ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+			--[[ ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 			ct:AddText(Prop.Description.." is a dev only item!")
-			ct:Send(ply)
+			ct:Send(ply) ]]
+			mt.str=Prop.Description.." is a dev only item!"
+			mt.col=Color(158,49,49,255)
+			msend(ply,mt)
 			return 
 		else
 			if ply.PropSpawnDelay <= CurTime() then
@@ -270,37 +340,48 @@ function GM:PurchaseProp(ply, cmd, args)
 				-- Checking to see if they can even spawn props.
 				if(ply:IsSuperAdmin())then
 					if ply:GetCount("flood_props") >= GetConVar("flood_max_sadmin_props"):GetInt() then
-						ct:AddText("[Flood] ", Color(158, 49, 49, 255))
-						ct:AddText("You have reached the admin's prop spawning limit!")
-						ct:Send(ply)
+						--[[ ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+						ct:AddText("You have reached the sadmin's prop spawning limit!")
+						ct:Send(ply) ]]
+						mt.str="You have reached the sadmin's prop spawning limit!"
+						mt.col=Color(158,49,49,255)
+						msend(ply,mt)
 						return
 					end 
 				elseif ply:IsAdmin() then
 					if ply:GetCount("flood_props") >= GetConVar("flood_max_admin_props"):GetInt() then
-						ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+						--[[ ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 						ct:AddText("You have reached the admin's prop spawning limit!")
-						ct:Send(ply)
+						ct:Send(ply) ]]
+						mt.str="You have reached the admin's prop spawning limit!"
+						mt.col=Color(158,49,49,255)
+						msend(ply,mt)
 						return
 					end 
 				elseif ply:IsDonator() then
 					if ply:GetCount("flood_props") >= GetConVar("flood_max_donator_props"):GetInt() then
-						ct:AddText("[Flood] ", Color(158, 49, 49, 255))
-						ct:AddText("You have reached the donator's prop spawning limit!")
-						ct:Send(ply)
+						--[[ ct:AddText("[Flood] ", Color(158, 49, 49, 255)) ]]
+						--[[ ct:AddText("You have reached the donator's prop spawning limit!") ]]
+						--[[ ct:Send(ply) ]]
+						mt.str="You have reached the donater's prop spawning limit!"
+						mt.col=Color(158,49,49,255)
+						msend(ply,mt)
 						return
 					end
 				else
 					if ply:GetCount("flood_props") >= GetConVar("flood_max_player_props"):GetInt() then 
-						ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+						--[[ ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 						ct:AddText("You have reached the player's prop spawning limit!")
-						ct:Send(ply)
+						ct:Send(ply) ]]
+						mt.str="You have reached the player's prop spawning limit!"
+						mt.col=Color(158,49,49,255)
+						msend(ply,mt)
 						return
 					end
 				end
 				local pp=Prop.Price --Faster
 				if ply:CanAfford(pp) then
 					ply:SubCash(pp)
-
 					local ent = ents.Create("prop_physics")
 					if(not ent)then return end
 					ent:SetModel(Prop.Model)
@@ -309,9 +390,11 @@ function GM:PurchaseProp(ply, cmd, args)
 					ea[3]=0
 					ent:SetAngles(ea)
 					ent:SetAngles((ent:GetForward()*-1):Angle())
-					ent:SetPos(tr.HitPos + Vector(0, 0, (ent:OBBCenter():Distance(ent:OBBMins()) + 5)))
+					ent:SetPos(tr.HitPos)
 					ent:CPPISetOwner(ply)
 					ent:Spawn()
+					FixInvalidPhysicsObject(ent)
+					TryFixPropPosition(ply,ent,tr.HitPos)
 					ent:Activate()
 					ent:SetHealth(999999999)
 					ent:SetNWInt("CurrentPropHealth", math.floor(Prop.Health))
@@ -351,28 +434,40 @@ function GM:PurchaseProp(ply, cmd, args)
 					undo.AddFunction(undofunc,ent,pp)
 					undo.SetPlayer(ply)
 					undo.Finish("Prop["..ent:EntIndex().."]".." $"..tostring(pp))
-					ct:AddText("[Flood] ", Color(132, 199, 29, 255))
+					--[[ ct:AddText("[Flood] ", Color(132, 199, 29, 255))
 					ct:AddText("You have purchased a(n) "..Prop.Description..".")
-					ct:Send(ply)
-						
+					ct:Send(ply) ]]
+					mt.str="You have purchased a prop!"
+					mt.col=Color(132,199,29,255)
+					msend(ply,mt)
+					Msg(ply:SteamID(),' Spawned a(n) ',Prop.Description..".\n")
 					hook.Call("PlayerSpawnedProp", gmod.GetGamemode(), ply, ent:GetModel(), ent)
 					ply:AddCount("flood_props", ent)
 				else
-					ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+					--[[ ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 					ct:AddText("You do not have enough cash to purchase a(n) "..Prop.Description..".")
-					ct:Send(ply)
+					ct:Send(ply) ]]
+					mt.str="You DO NOT have enough cash to purchase this prop."
+					mt.col=Color(158,49,49,255)
+					msend(ply,mt)
 				end
 			else
-				ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+				--[[ ct:AddText("[Flood] ", Color(158, 49, 49, 255))
 				ct:AddText("You are attempting to spawn props too quickly.")
-				ct:Send(ply)
+				ct:Send(ply) ]]
+				mt.str="You are attempting to spawn props too quickly,try again!"
+				mt.col=Color(158,49,49,255)
+				msend(ply,mt)
 			end
 			ply.PropSpawnDelay = CurTime() + 0.25
 		end
 	else
-		ct:AddText("[Flood] ", Color(158, 49, 49, 255))
-		ct:AddText("You can not purcahse a(n) "..Prop.Description.." at this time.")
-		ct:Send(ply)
+		--[[ ct:AddText("[Flood] ", Color(158, 49, 49, 255))
+		ct:AddText("You can not purchase a(n) "..Prop.Description.." at this time.")
+		ct:Send(ply) ]]
+		mt.str="You can not purchase any prop at this time."
+		mt.col=Color(158,49,49,255)
+		msend(ply,mt)
 	end
 end
 concommand.Add("FloodPurchaseProp", function(ply, cmd, args) hook.Call("PurchaseProp", GAMEMODE, ply, cmd, args) end)

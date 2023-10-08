@@ -15,7 +15,7 @@ function PANEL:Init()
 		draw.RoundedBox(0, 0, 0, w, h, Color(0, 0, 0, 200))
 	end
 	GAMEMODE.ShopMenu = self.MainFrame
-
+	GAMEMODE.ShopMenuPanel=self
 	self.LeftFrame = vgui.Create("DFrame", self.MainFrame)
 	self.LeftFrame:SetPos(x * 0.1, y * 0.1)
 	self.LeftFrame:SetSize(x * 0.475, y * 0.8)

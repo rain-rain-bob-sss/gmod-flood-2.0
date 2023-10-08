@@ -12,6 +12,10 @@ if(SERVER)then
       net.WriteTable(messagetbl)
     net.Broadcast()
   end
+  local base={str="NIL",col=Color(255,255,255),a=500,x=100,y=-200,ft="DermaLarge"}
+  function FM_MESSAGE_BASE()
+    return base
+  end
 else --NO BUDGET TO THINK ABOUT VAR NAME
   local e=e or {}
   --Some stupid dont update their gmod,fuck you.

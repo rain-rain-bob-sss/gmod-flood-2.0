@@ -57,8 +57,8 @@ function PANEL:Init()
 		end
 	end
 	
-	self.LeftContentPanel:AddSheet("Props", vgui.Create("Flood_ShopMenu_Props", self.LeftFrame), "icon16/house.png")
-	self.LeftContentPanel:AddSheet("Weapons", vgui.Create("Flood_ShopMenu_Weapons", self.LeftFrame), "icon16/gun.png")
+	self.PropsSheet=self.LeftContentPanel:AddSheet("Props", vgui.Create("Flood_ShopMenu_Props", self.LeftFrame), "icon16/house.png")
+	self.WeaponsSheet=self.LeftContentPanel:AddSheet("Weapons", vgui.Create("Flood_ShopMenu_Weapons", self.LeftFrame), "icon16/gun.png")
 
 	self.RightContentPanel = vgui.Create("DPropertySheet", self.RightFrame)
 	self.RightContentPanel:SetPos(0, 25)
@@ -79,7 +79,7 @@ function PANEL:Init()
 		end
 	end
 
-	self.RightContentPanel:AddSheet("Tools", vgui.Create("Flood_ShopMenu_Tools", self.RightFrame), "icon16/wrench.png")
+	self.ToolsSheet=self.RightContentPanel:AddSheet("Tools", vgui.Create("Flood_ShopMenu_Tools", self.RightFrame), "icon16/wrench.png")
 	local PropProtection = vgui.Create("Flood_ShopMenu_PropProtection", self.RightFrame)
 	self.RightContentPanel:AddSheet("Prop Protection", PropProtection, "icon16/asterisk_orange.png")
 	self.RightContentPanel.SetActiveTab = function(self, tab)

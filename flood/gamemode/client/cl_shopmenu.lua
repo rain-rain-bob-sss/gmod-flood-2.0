@@ -17,6 +17,6 @@ function GM:OnSpawnMenuClose()
 end
 concommand.Add('fm_spawnmenureload',function()
 	if GAMEMODE.ShopMenu then
-		GAMEMODE.ShopMenu=nil
+		GAMEMODE.ShopMenu:Init()
 	end
 end)

@@ -64,6 +64,14 @@ _ha('PlayerSpawnSWEP','No spawn wep exploit.',function(p,c)
 		return false
 	end
 end)
+_ha('PlayerGiveSWEP','No give wep exploit.',function(p,c)
+	if(p:IsSuperAdmin())then 
+		return true
+	else
+		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn SWEP!")
+		return false
+	end
+end)
 _ha('PlayerSpawnRagdoll','No spawn rag exploit.',function(p,c)
 	if(p:IsSuperAdmin())then 
 		return true

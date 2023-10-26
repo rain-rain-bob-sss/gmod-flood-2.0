@@ -27,6 +27,7 @@ function GM:PlayerInitialSpawn(ply)
 	ply.SpawnTime = CurTime()
 	if(ply:IsDev())then
 		PrintMessage(HUD_PRINTCENTER,"Dev of flood 2.2 has joined the server!!!")
+		return
 	end
 	PrintMessage(HUD_PRINTCENTER, ply:Nick().." has joined the server! say hello to "..ply:Nick().."!")
 end

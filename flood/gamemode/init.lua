@@ -26,6 +26,9 @@ for _, file in pairs (file.Find("flood/gamemode/client/vgui/*.lua", "LUA")) do
 	MsgN("-> "..file)
 	AddCSLuaFile("flood/gamemode/client/vgui/"..file)
 end
+function GM:CanProperty(ply, property, ent)
+	return false
+end
 local _ha = hook.Add
 -- Timer ConVars! Yay!
 CreateConVar("flood_build_time", 240, FCVAR_NOTIFY, "Time allowed for building (def: 240)")

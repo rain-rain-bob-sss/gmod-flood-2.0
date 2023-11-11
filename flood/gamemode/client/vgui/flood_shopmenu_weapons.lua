@@ -37,8 +37,12 @@ function PANEL:Init()
 			local ItemIcon = vgui.Create("SpawnIcon", self)
 			ItemIcon:SetModel(v.Model)
 			ItemIcon:SetSize(150,150)
-			ItemIcon.DoClick = function() 
-				RunConsoleCommand("FloodPurchaseWeapon", k)
+			ItemIcon.DoClick = function(self) 
+				local menu = DermaMenu(false,self) 
+				menu:AddOption( "Purchase", function() RunConsoleCommand("FloodPurchaseWeapon", k) end )
+				menu:AddOption( "Sell", function() chat.AddText(Color( 100, 100, 255 ),"[Flood]This is a wip option!") end ) 
+				menu:AddOption( "Close", function()  end ) -- The menu will remove itself, we don't have to do anything.
+				menu:Open()
 				surface.PlaySound("ui/buttonclick.wav")		
 			end
 

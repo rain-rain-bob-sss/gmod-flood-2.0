@@ -81,6 +81,13 @@ local function Flood_PayCash(ply,txt)
 				ct:AddText("[Flood] ", Color(132, 199, 29, 255))
 				ct:AddText("Too high! max is 10000.")
 				ct:Send(ply)
+				return
+			end
+			if(tonumber(c[3])<0)then
+				ct:AddText("[Flood] ", Color(132, 199, 29, 255))
+				ct:AddText("negative is not allowed.")
+				ct:Send(ply)
+				return
 			end
 			if(ply:CanAfford(tonumber(c[3])))then
 				ct:AddText("[Flood] ", Color(132, 199, 29, 255))

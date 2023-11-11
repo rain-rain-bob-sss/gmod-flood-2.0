@@ -71,6 +71,17 @@ local function Flood_PayCash(ply,txt)
 				ct:AddText("No number?")
 				ct:Send(ply)
 			end
+			if(ply.PayTime and (ply.PayTime+60)>CurTime())then 
+				ct:AddText("[Flood] ", Color(132, 199, 29, 255))
+				ct:AddText("You cannot spam pay cash,wait 1 Min(s)")
+				ct:Send(ply)
+				return 
+			end
+			if(tonumber(c[3])>10000)then
+				ct:AddText("[Flood] ", Color(132, 199, 29, 255))
+				ct:AddText("Too high! max is 10000.")
+				ct:Send(ply)
+			end
 			if(ply:CanAfford(tonumber(c[3])))then
 				ct:AddText("[Flood] ", Color(132, 199, 29, 255))
 				ct:AddText("You gave "..p:Nick().." "..tonumber(c[3]).."$!")
@@ -79,6 +90,7 @@ local function Flood_PayCash(ply,txt)
 				ct:AddText(ply:Nick().." gave "..'you'.." "..tonumber(c[3]).."$!")
 				ct:Send(p)
 				ply:SubCash(tonumber(c[3]))
+				ply.PayTime=CurTime()
 				p:AddCash(tonumber(c[3]))
 			else
 				ct:AddText("[Flood] ", Color(158, 49, 49, 255))

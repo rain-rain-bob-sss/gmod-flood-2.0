@@ -180,7 +180,7 @@ function GM:PlayerShouldTaunt( ply, actid )
 end
 
 function GM:CanPlayerSuicide(ply)
-	ply:Spawn()
+	ply:Kill()
 	return false --????
 end
 

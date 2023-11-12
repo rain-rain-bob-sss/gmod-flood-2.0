@@ -180,6 +180,9 @@ function GM:PlayerShouldTaunt( ply, actid )
 end
 
 function GM:CanPlayerSuicide(ply)
+	if self:GetGameState() >= 2 then
+		ply:ChatPrint("You cannot kill bind in fight state")
+	end
 	ply:Kill()
 	return false --????
 end

@@ -24,10 +24,11 @@ end
 --end
 GM.SpawnMenuOpen=no
 GM.ContextMenuOpen=no
+--Thanks for Sulfito reporting i used wrong var!
 hook.Add("Think","No you dumbass",function()
-	if(GM.SpawnMenuOpen~=no)then
+	if(GAMEMODE.SpawnMenuOpen~=no)then
 		GM.SpawnMenuOpen=no
-	elseif(GM.ContextMenuOpen~=no)then
+	elseif(GAMEMODE.ContextMenuOpen~=no)then
 		GM.ContextMenuOpen=no
 	end
 end)

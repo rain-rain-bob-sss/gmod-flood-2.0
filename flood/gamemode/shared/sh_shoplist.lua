@@ -13,7 +13,7 @@ Pcp[3]=0
 -- Weapon categories
 WeaponCategories[1] = "Basic Weapons"
 WeaponCategories[2] = "Xdefm fishing mod"
-WeaponCategories[3] = "Dev only"
+--WeaponCategories[3] = "Dev only" "This was dumb idea,time to disabled all of it."--myself
 function GM:AddProp(tbl)
     if(tbl.Price==nil)then
         if(Pcp[tbl.Group])then

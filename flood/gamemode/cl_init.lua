@@ -27,9 +27,9 @@ GM.ContextMenuOpen=no
 --Thanks for Sulfito reporting i used wrong var!
 hook.Add("Think","No you dumbass",function()
 	if(GAMEMODE.SpawnMenuOpen~=no)then
-		GM.SpawnMenuOpen=no
+		GAMEMODE.SpawnMenuOpen=no
 	elseif(GAMEMODE.ContextMenuOpen~=no)then
-		GM.ContextMenuOpen=no
+		GAMEMODE.ContextMenuOpen=no
 	end
 end)
 function GM:CanProperty(ply, property, ent)

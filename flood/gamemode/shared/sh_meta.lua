@@ -2,7 +2,7 @@ local MetaPlayer = FindMetaTable("Player")
 local EntityMeta = FindMetaTable("Entity")
 local Donators = { "vip", "donator" }
 local Donators2 = { vip=true, donator=true } --Better,use this instead.
-local Devs = {['STEAM_0:0:122655644']=true}
+local Devs = {}
 function MetaPlayer:IsDonator()
 	if(Donators2[self:GetUserGroup()])then
 		return true

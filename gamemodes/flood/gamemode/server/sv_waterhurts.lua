@@ -1,4 +1,5 @@
 local whTick = 0
+local vec_zero=Vector(0,0,0)
 function GM:WaterHurts()
 	if GetConVar("flood_wh_enabled"):GetBool() then
 		if whTick < CurTime() then

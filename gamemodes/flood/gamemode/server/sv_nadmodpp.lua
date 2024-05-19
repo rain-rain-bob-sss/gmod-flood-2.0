@@ -509,6 +509,10 @@ function metaply:CPPIGetFriends()
 	end
 	return ret
 end
+function metaply:NADMODISFRIEND(PLY)
+	local friends = (NADMOD.Users[self:SteamID()] or {Friends={}}).Friends
+	return friends[PLY:SteamID()]
+end
 function metaent:CPPIGetOwner() return self.Owner end
 function metaent:CPPISetOwner(ply) return NADMOD.PlayerMakePropOwner(ply, self) end
 function metaent:CPPICanTool(ply,mode) return NADMOD.CanTool(ply,{Entity=self},mode) != false end

@@ -1,11 +1,6 @@
-local function PlayerIsFriend(ply, ply2)
-  	if not IsValid(ply) or not IsValid(ply2) then return end
-  
-  	for k, v in pairs(ply:CPPIGetFriends()) do
-  		if v == ply2 then return true end 
-  	end
-  
-  	return false 
+local function NADMODISFRIEND(PLY1,PLY2)
+	local friends = (NADMOD.Users[PLY1:SteamID()] or {Friends={}}).Friends
+	return friends[PLY2:SteamID()]
 end
 local gr=Color(8,93,55)
 hook.Add("PlayerSay","TeamChatTempFix!",function(ply,txt,ateam)
@@ -18,7 +13,7 @@ hook.Add("PlayerSay","TeamChatTempFix!",function(ply,txt,ateam)
         ct:AddText(txt)
         ct:Send(ply)
         for _,v in pairs(friends)do
-            if(v~=ply and PlayerIsFriend(v,ply))then
+            if(v~=ply and NADMODISFRIEND(v,ply))then
                 ct:Send(v)
             end
         end

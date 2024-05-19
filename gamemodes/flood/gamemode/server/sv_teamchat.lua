@@ -12,9 +12,9 @@ hook.Add("PlayerSay","TeamChatTempFix!",function(ply,txt,ateam)
     if(ateam)then
         local friends=ply:CPPIGetFriends()
         local ct=ChatText()
-        ct:AddText("[TEAM]",gr)
+        ct:AddText("[TEAM] ",gr)
         ct:AddText(ply:Nick(),team.GetColor(ply:Team()))
-        ct:AddText(":")
+        ct:AddText(": ")
         ct:AddText(txt)
         ct:Send(ply)
         for _,v in pairs(friends)do

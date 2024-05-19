@@ -9,7 +9,7 @@ function GM:WaterHurts()
 					dmginfo:SetDamage(GetConVar("flood_wh_damage"):GetFloat())
 				    dmginfo:SetAttacker(game.GetWorld())
 				    dmginfo:SetInflictor(game.GetWorld())
-					dmginfo:SetDamageForce(0)
+					dmginfo:SetDamageForce(vec_zero)
 					dmginfo:SetDamagePosition(v:GetShootPos())
 				    v:TakeDamageInfo(dmginfo)
 				end

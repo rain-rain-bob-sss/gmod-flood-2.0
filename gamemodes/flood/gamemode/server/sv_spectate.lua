@@ -37,6 +37,7 @@ local OBS_KEY=table.GetKeys(OBS)
 local MA=#OBS
 function MetaPlayer:CycleOBSMode()
 	local OBSMODE=self.OBSMODE
+	if(not OBSMODE)then OBSMODE=1 end
 	local i=OBS_KEY[OBSMODE]
 	if(i+1>MA)then
 		i=1
@@ -44,5 +45,5 @@ function MetaPlayer:CycleOBSMode()
 		i=i+1
 	end
 	self.OBSMODE=OBS[i]
-	self:CycleSpectator(0)
+	self:SetObserverMode(OBS[i])
 end

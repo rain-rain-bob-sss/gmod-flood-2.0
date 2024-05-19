@@ -131,7 +131,7 @@ function NADMOD.PlayerCanTouch(ply, ent)
 			NADMOD.SetOwnerWorld(ent)
 		else
 			--NADMOD.PlayerMakePropOwner(ply, ent)
-			NADMOD.Notify(ply, "You may not touch this prop.")
+			--NADMOD.Notify(ply, "You may not touch this prop.")
 			return false
 		end
 	end

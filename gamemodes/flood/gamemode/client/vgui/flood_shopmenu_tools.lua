@@ -91,9 +91,6 @@ function PANEL:CreateCP( button )
 	for k, v in pairs( kids ) do
 		v:SetVisible( false )
 	end
- 	if ( self.LastSelected ) then 
- 		self.LastSelected:SetSelected( false ) 
- 	end 
  	 
  	button:SetSelected( true ) 
  	self.LastSelected = button 

@@ -86,18 +86,28 @@ function PANEL:AddCategory(Name, Label, tItems)
 end
 
 function PANEL:CreateCP( button ) 
+	local Content=self.Content
+    	local kids = Content:GetCanvas():GetChildren()
+	for k, v in pairs( kids ) do
+		v:SetVisible( false )
+	end
  	if ( self.LastSelected ) then 
  		self.LastSelected:SetSelected( false ) 
  	end 
  	 
  	button:SetSelected( true ) 
  	self.LastSelected = button 
-   
+   	--[[
  	local cp = controlpanel.Get( button.Name ) 
  	if ( !cp:GetInitialized() ) then 
  		cp:FillViaTable( button ) 
  	end 
- 	 
+ 	--]]
+	local cp = vgui.Create('ControlPanel',Content)
+    	cp:Dock(FILL)
+   	cp:SetLabel(button.Text)
+    	button.ControlPanelBuildFunction(cp)
+	
  	self.Content:Clear() 
  	self.Content:AddItem(cp) 
  	self.Content:Rebuild() 
@@ -107,7 +117,9 @@ function PANEL:CreateCP( button )
 		draw.RoundedBox(0, 0, 0, w, h, Color(240, 240, 240, 255))
 		draw.RoundedBox(4, 0, 0, w, self.Header:GetTall(), Color(24, 24, 24, 255))
 	end
-   
+	Content:AddItem(controlpanel)
+    	Content:SetVisible(true)
+   	self.ActiveCPName = cp.Name
  	g_ActiveControlPanel = cp 
 end
 vgui.Register("Flood_ShopMenu_Tools", PANEL)

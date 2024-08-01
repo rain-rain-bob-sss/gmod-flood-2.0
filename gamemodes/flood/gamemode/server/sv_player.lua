@@ -400,7 +400,8 @@ function GM:PurchaseProp(ply, cmd, args)
 					FixInvalidPhysicsObject(ent)
 					TryFixPropPosition(ply,ent,tr.HitPos)
 					ent:Activate()
-					ent:SetHealth(999999999)
+					ent:SetHealth(-1)
+					ent:SetSaveValue("m_takedamage",0)
 					ent:SetNWInt("CurrentPropHealth", math.floor(Prop.Health))
 					ent:SetNWInt("BasePropHealth", math.floor(Prop.Health))
 					ent:SetNWInt("FM_Price", math.floor(Prop.Price))
@@ -409,6 +410,12 @@ function GM:PurchaseProp(ply, cmd, args)
 						local b=Prop.Buoyancy
 						if(b)then
 							ent:GetPhysicsObject():SetBuoyancyRatio(b/100)
+							b=b/100
+							local phy=ent:GetPhysicsObject()
+							hook.Add("Think",ent:GetPhysicsObject(),function()
+								if not IsValid(ent) then return end
+								phy:SetBuoyancyRatio(b)
+							end)
 						end
 						local m=Prop.Mass
 						if(m)then
@@ -425,7 +432,7 @@ function GM:PurchaseProp(ply, cmd, args)
 						ent:GetPhysicsObject():Sleep()
 					end)
 					local undofunc=function(t,ent,money)
-						if(ent:IsValid() and (not ent.flood_trashed))then
+						if(ent:IsValid() and (not ent.flood_trashed) and ply:Alive())then
 							ply:AddCash(money)
 							--ent:EmitSound("garrysmod/save_load1.wav")
 							ent:Remove()

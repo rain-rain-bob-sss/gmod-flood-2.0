@@ -67,10 +67,10 @@ function PANEL:AddCategory(Name, Label, tItems)
 			local item = Category:Add(tool.Text)
 			item.DoClick = function(button)
 				self:CreateCP(button)
-				--E
-				timer.Simple(1/33,function()
+				--E---A sports
+				--timer.Simple(1/33,function()
 					LocalPlayer():ConCommand(tool.Command)
-				end)
+				--end)
 			end
 
 			item.ControlPanelBuildFunction = tool.CPanelFunction
@@ -94,27 +94,18 @@ function PANEL:CreateCP( button )
  	 
  	button:SetSelected( true ) 
  	self.LastSelected = button 
-   	--[[
- 	local cp = controlpanel.Get( button.Name ) 
- 	if ( !cp:GetInitialized() ) then 
- 		cp:FillViaTable( button ) 
- 	end 
- 	--]]
 	local cp = vgui.Create('ControlPanel',Content)
     	cp:Dock(FILL)
    	cp:SetLabel(button.Text)
     	button.ControlPanelBuildFunction(cp)
 	
- 	self.Content:Clear() 
- 	self.Content:AddItem(cp) 
- 	self.Content:Rebuild() 
  	cp:SetVisible( true )
 	cp:Dock( TOP )
 	cp.Paint = function(self, w, h)
 		draw.RoundedBox(0, 0, 0, w, h, Color(240, 240, 240, 255))
 		draw.RoundedBox(4, 0, 0, w, self.Header:GetTall(), Color(24, 24, 24, 255))
 	end
-	Content:AddItem(controlpanel)
+	Content:AddItem(cp)
     	Content:SetVisible(true)
    	self.ActiveCPName = cp.Name
  	g_ActiveControlPanel = cp 

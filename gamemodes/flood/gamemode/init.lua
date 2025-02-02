@@ -6,7 +6,7 @@ MsgN("_-_-_-_- Flood Server Side -_-_-_-_")
 MsgN("Loading Server Files")
 for _, file in pairs (file.Find("flood/gamemode/server/*.lua", "LUA")) do
 	MsgN("-> "..file)
-	include("flood/gamemode/server/"..file) 
+	include("flood/gamemode/server/"..file)
 end
 
 MsgN("Loading Shared Files")
@@ -52,50 +52,50 @@ CreateConVar("flood_max_donator_props", 16, FCVAR_NOTIFY, "How many props a dona
 CreateConVar("flood_max_admin_props", 16, FCVAR_NOTIFY, "How many props an admin can spawn (def: 16)")
 CreateConVar("flood_max_sadmin_props", 16, FCVAR_NOTIFY, "How many props an superadmin can spawn (def: 16)")
 _ha('PlayerSpawnSENT','No spawn sent exploit.',function(p,c)
-	if(p:IsSuperAdmin())then 
+	if(p:IsSuperAdmin())then
 		return true
 	else
-		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn sent!")
+		PrintMessage(3,"("..p:Nick()..")".." Tried to spawn sent!")
 		return false
 	end
 end)
 _ha('PlayerSpawnSWEP','No spawn wep exploit.',function(p,c)
-	if(p:IsSuperAdmin())then 
+	if(p:IsSuperAdmin())then
 		return true
 	else
-		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn SWEP!")
+		PrintMessage(3,"("..p:Nick()..")".." Tried to spawn SWEP!")
 		return false
 	end
 end)
 _ha('PlayerGiveSWEP','No give wep exploit.',function(p,c)
-	if(p:IsSuperAdmin())then 
+	if(p:IsSuperAdmin())then
 		return true
 	else
-		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn SWEP!")
+		PrintMessage(3,"("..p:Nick()..")".." Tried to spawn SWEP!")
 		return false
 	end
 end)
 _ha('PlayerSpawnRagdoll','No spawn rag exploit.',function(p,c)
-	if(p:IsSuperAdmin())then 
+	if(p:IsSuperAdmin())then
 		return true
 	else
-		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn ragdoll!")
+		PrintMessage(3,"("..p:Nick()..")".." Tried to spawn ragdoll!")
 		return false
 	end
 end)
 _ha('PlayerSpawnVehicle','No spawn veh exploit.',function(p,c)
-	if(p:IsSuperAdmin())then 
+	if(p:IsSuperAdmin())then
 		return true
 	else
-		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn vehicle!")
+		PrintMessage(3,"("..p:Nick()..")".." Tried to spawn vehicle!")
 		return false
 	end
 end)
 _ha('PlayerSpawnEffect','No spawn effect exploit.',function(p,c)
-	if(p:IsSuperAdmin())then 
+	if(p:IsSuperAdmin())then
 		return true
 	else
-		PrintMessage(3,"Alert Exploiter found! ("..p:Nick()..")".." Tried to spawn effect!")
+		PrintMessage(3,"("..p:Nick()..")".." Tried to spawn effect!")
 		return false
 	end
 end)
@@ -112,13 +112,13 @@ end
 
 function GM:InitPostEntity()
 	self:CheckForWaterControllers()
-	for k,v in pairs(ents.GetAll()) do 
-		if v:GetClass() == "trigger_hurt" then 
-			v:Remove() 
-		end 
-		if v:GetClass() == "trigger_teleport" then 
-			v:Remove() 
-		end 
+	for k,v in pairs(ents.GetAll()) do
+		if v:GetClass() == "trigger_hurt" then
+			v:Remove()
+		end
+		if v:GetClass() == "trigger_teleport" then
+			v:Remove()
+		end
 	end
 end
 
@@ -143,10 +143,9 @@ function GM:CleanupMap()
 end
 
 function GM:ShowHelp(ply)
-	ply:ConCommand("flood_helpmenu")
+	--ply:ConCommand("flood_helpmenu")
 end
 wepdmglist={}
---Cmon,Are you dumb? why loop in entitytakedamage! dumbass
 for _, Weapon in pairs(Weapons) do
 	wepdmglist[Weapon.Class]=tonumber(Weapon.Damage)
 end
@@ -178,20 +177,20 @@ function GM:EntityTakeDamage(ent, dmginfo)
 		end
 		return false
 	end
-	if GAMEMODE:GetGameState() ~= 2 and GAMEMODE:GetGameState() ~= 3 and GAMEMODE:GetGameState() ~= 4 then
+	if GAMEMODE:GetGameState() <= 2 then
 		return false
 	else
 		if not ent:IsPlayer() then
 			if attacker:IsPlayer() then
 				local wep = dmginfo:GetAttacker():GetActiveWeapon():IsValid() and dmginfo:GetAttacker():GetActiveWeapon() or dmginfo:GetInflictor()
 				--print(wep:GetClass())
-				--if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then 
-				if(NADMOD.IsFriendProp(ent,attacker) or attacker==ent:CPPIGetOwner())then 
+				--if(PlayerIsFriend(ent:CPPIGetOwner(),attacker))then
+				if(NADMOD.IsFriendProp(ent,attacker) or attacker==ent:CPPIGetOwner())then
 					if((wepsdamagealt[wep:GetClass()] or wepdmglist[wep:GetClass()] or 1) < 0)then --heal weapon?
 						--do something?
 					else
 						if(GAMEMODE:GetGameState()~=4)then
-							return false 
+							return false
 						end
 					end
 				end
@@ -225,7 +224,7 @@ function GM:EntityTakeDamage(ent, dmginfo)
 					ent:SetNWInt("CurrentPropHealth", ent:GetNWInt("CurrentPropHealth") - (entitiesdmg[attacker:GetClass()] or 1))
 				end
 			end
-			
+
 			if ent:GetNWInt("CurrentPropHealth") <= 0 and IsValid(ent) then
 				for i=1,5 do
 					ent:EmitSound('physics/concrete/concrete_break2.wav',75,math.random(100,125+i*5),1,CHAN_STATIC,0,0)
@@ -270,13 +269,13 @@ end
 hook.Add("PlayerShouldTakeDamage", "Flood_PlayerShouldTakeDamge", ShouldTakeDamage)
 
 function GM:KeyPress(ply, key)
- 	if ply:Alive() ~= true then 
- 		if key == IN_ATTACK then 
+ 	if ply:Alive() ~= true then
+ 		if key == IN_ATTACK then
  			ply:CycleSpectator(1)
- 		end 
- 		if key == IN_ATTACK2 then 
+ 		end
+ 		if key == IN_ATTACK2 then
  			ply:CycleSpectator(-1)
- 		end 
+ 		end
 		if key == IN_JUMP then
 			ply:CycleOBSMode()
 		end

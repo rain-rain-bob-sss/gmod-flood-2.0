@@ -489,14 +489,14 @@ function GM:PurchaseWeapon(ply, cmd, args)
 	local ct = ChatText()
 	if(tonumber(args[1])==nil)then
 		ct:AddText('[Anti Exploit]',Color(255,0,0,255))
-		ct:AddText('A r e y o u.. e x p l o i t i n g ?')
+		ct:AddText('No.')
 		ct:Send(ply)
 		return
 	end
 	local Weapon = Weapons[math.floor(args[1])]
 	if(Weapon==nil)then 
 		ct:AddText('[Anti Exploit]',Color(255,0,0,255))
-		ct:AddText('A r e y o u.. e x p l o i t i n g ?')
+		ct:AddText('no.')
 		ct:Send(ply)
 		return
 	end

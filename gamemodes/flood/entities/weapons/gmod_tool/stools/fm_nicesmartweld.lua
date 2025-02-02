@@ -106,7 +106,7 @@ function TOOL.BuildCPanel(panel)
 		Type = "float",
 		Min = "0",
 		Max = "1000",
-		Command = "smartweld_selectradius"
+		Command = "fm_nicesmartweld_selectradius"
 	})
 
 	-- Force Limit
@@ -116,7 +116,7 @@ function TOOL.BuildCPanel(panel)
 		Type = "float",
 		Min = "0",
 		Max = "10000",
-		Command = "smartweld_strength"
+		Command = "fm_nicesmartweld_strength"
 	})
 
 	-- Max Welds Per Prop
@@ -126,45 +126,45 @@ function TOOL.BuildCPanel(panel)
 		Type = "Integer",
 		Min = "1",
 		Max = "10",
-		Command = "smartweld_maxweldsperprop"
+		Command = "fm_nicesmartweld_maxweldsperprop"
 	})
 
 	-- Weld to each other or all to world
 	panel:AddControl("Checkbox", {
 		Label = "#tool.fm_nicesmartweld.world",
 		Help = "#tool.fm_nicesmartweld.world",
-		Command = "smartweld_world"
+		Command = "fm_nicesmartweld_world"
 	})
 
 	-- No-Collide Props While Welding
 	panel:AddControl("Checkbox", {
 		Label = "#tool.fm_nicesmartweld.nocollide",
 		Help = "#tool.fm_nicesmartweld.nocollide",
-		Command = "smartweld_nocollide"
+		Command = "fm_nicesmartweld_nocollide"
 	})
 
 	-- Freeze Props When Welded
 	panel:AddControl("Checkbox", {
 		Label = "#tool.fm_nicesmartweld.freeze",
 		Help = "#tool.fm_nicesmartweld.freeze",
-		Command = "smartweld_freeze"
+		Command = "fm_nicesmartweld_freeze"
 	})
 
 	-- Clear Previous Welds Before Welding
 	panel:AddControl("Checkbox", {
 		Label = "#tool.fm_nicesmartweld.clearwelds",
 		Help = "#tool.fm_nicesmartweld.clearwelds",
-		Command = "smartweld_clearwelds"
+		Command = "fm_nicesmartweld_clearwelds"
 	})
 
 	-- Color
 	panel:AddControl("Color", {
 		Label = "#tool.fm_nicesmartweld.color",
 		Help = "#tool.fm_nicesmartweld.color",
-		Red = "smartweld_color_r",
-		Green = "smartweld_color_g",
-		Blue = "smartweld_color_b",
-		Alpha = "smartweld_color_a"
+		Red = "fm_nicesmartweld_color_r",
+		Green = "fm_nicesmartweld_color_g",
+		Blue = "fm_nicesmartweld_color_b",
+		Alpha = "fm_nicesmartweld_color_a"
 	})
 end
 
@@ -201,15 +201,6 @@ function TOOL:LeftClick(tr)
 	if IsFirstTimePredicted() and IsValid(tr.Entity) and not tr.Entity:IsPlayer() then
 		if SERVER and not util.IsValidPhysicsObject(tr.Entity, tr.PhysicsBone) then
 			return false 
-		end
-
-		if self:GetOwner():KeyDown(IN_USE) then
-			if(self:GetOwner():IsAdmin())then
-				return self:AutoSelect(tr.Entity)
-			else
-				self:GetOwner():PrintMessage(4,"Opps! you cannot auto select,sorry!")
-				return
-			end
 		end
 
 		return self:HandleProp(tr)
